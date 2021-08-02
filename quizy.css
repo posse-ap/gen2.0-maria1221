@@ -38,7 +38,26 @@
 
 .correct {
     background-color: skyblue;
+    color: white;
 }
+
+.answerBox {
+  background-color: #EEEEEE; 
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px; 
+  padding-top: 20px;
+  height: 100px;
+}
+
+.correctText {
+  font-weight: bold; 
+  border-bottom: 3px solid dodgerblue;
+  margin-right: 480px;
+  margin-bottom: 10px;
+  width: 50px;
+}
+
 
 /* display: flex; 要素を横ならびにできる  */
 /* imgタグはinlineだからmargin: 0 auto;が効かない 
