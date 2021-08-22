@@ -58,6 +58,19 @@
   width: 50px;
 }
 
+.incorrect {
+  background-color: red;
+  color: white;
+}
+
+.incorrectAnswerText {
+  font-weight: bold; 
+  border-bottom: 3px solid red;
+  margin-right: 480px;
+  margin-bottom: 10px;
+  width: 65px;
+}
+
 
 /* display: flex; 要素を横ならびにできる  */
 /* imgタグはinlineだからmargin: 0 auto;が効かない 
