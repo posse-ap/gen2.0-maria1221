@@ -86,7 +86,7 @@ for (let questions = 1; questions < 11; questions++) {
     '<div class="quiz">'
     +'<div class="question"  id ="quiz">'
     +'<h2 class="underline">' + questions + '. この地名はなんて読む？</h2>'
-    +'<img src="https://d1khcm40x1j0f.cloudfront.net/quiz/34d20397a2a506fe2c1ee636dc011a07.png" alt=問いとなる地名の画像 />'
+    +'<img src="../quizy/' + questions + '.png" alt=問いとなる地名の画像 />'
     +'<ul>'+'<li class="choice" id = "incorrect"' + questions + '>' + choices[questions] + '</li>' + '<li class="choice" id = "correct">' + choices[questions+1] +'</li>'
     +'<li class="choice" id = "incorrect2">' + choices[questions+2] + '</li>'
     +'</ul>'
