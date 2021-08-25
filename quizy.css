@@ -50,7 +50,7 @@
   height: 100px;
 }
 
-.correctText {
+.answerText{
   font-weight: bold; 
   border-bottom: 3px solid dodgerblue;
   margin-right: 480px;
