@@ -59,7 +59,6 @@ for (let i = 0; i < quizSetLength; i++) {
   // position には'beforebegin''afterbegin''beforeend''afterend'の4つを指定できる
   
 }
-
 // 「絶対パス」は、インターネット上での一意のアドレスだからファイルの場所を確実に伝えることができるが、同一サーバー上のファイルを全て「絶対パス」で記述すると画像ファイルを読み込む度にドメインからIPを探し、サーバーの画像ファイルを見つけて呼び出しリクエストするため、処理が余計にかかる。「相対パス」を指定しておけば、その手間がない
 
 
@@ -109,7 +108,6 @@ shuffledChoices.forEach(choiceShuffle => {
 }
 
 for (let i = 0; i < quizSetLength; i++) {
-
       let correctChoice =document.getElementById(`correct${i}`);
       correctChoice.addEventListener("click", function () {
         correctChoice.classList.add("correct");
