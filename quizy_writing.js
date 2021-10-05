@@ -99,4 +99,30 @@ function click(questionNumber) {
   })
 }
 
-// question();
+// questionContentのHTMLを出力する
+
+// 選択肢がシャッフルされるようにする
+// // フィッシャーイェーツのシャッフル
+// for ( let i = quizSet.length; i > 0; i--) {
+//   const j = Math.floor(Math.random() * (i + 1));
+//   // j 範囲内からランダムに選ばれる変数
+//   [quizSet[j], quizSet[i]] = [quizSet[i], quizSet[j]];
+//   // 分割代入を利用してiとjを入れ替える
+// }
+// これだと、配列quizSetがシャッフルされるから、例えば["たかなわ", "こうわ", "たかわ"]と["かめいど", "かめど", "かめと"]が入れ替わることになってしまう
+// forEachでquizSetから問題の選択肢をそれぞれ取り出してシャッフルさせる
+
+quizSet.forEach(function(questionChoices, index) {
+  // forEach(コールバック関数(現在取り出している要素の値, 要素のインデックス))
+
+ for ( let i = questionChoices.length; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  // j 範囲内からランダムに選ばれる変数
+  [questionChoices[j], questionChoices[i]] = [questionChoices[i], questionChoices[j]];
+  // 分割代入を利用してiとjを入れ替える
+}
+})
+// questionNumber 問題番号
+// quizSetList 選択肢の一覧
+// correctNumber 正解の選択肢の番号
+question();
