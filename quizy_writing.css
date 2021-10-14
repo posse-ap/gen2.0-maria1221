@@ -1,9 +1,11 @@
 .questionContent {
         margin: auto;
         width: 75%;
+        /* 画面のサイズを変えても飛び出さないようにする  */
 }     
 .questionImg {
     width: 100%;
+    /* これをしないと画像が画面のサイズを買えても画像のサイズが変わらないせいではみ出す */
 } 
 .question {
     margin-top: 40px;
@@ -21,7 +23,7 @@
 }
 .choice {
     font-size: 15px;
-    background-color: white;
+    background-color: #fafafa8c;
     margin: 10px 0;
     list-style: none;
     font-weight: bold;
