@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="resetcss.css">
+  <link rel="stylesheet" href="webapp.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- トップページ、投稿完了画面、モーダル画面、エラー画面 -->
+  <!-- トップページ -->
+  <!--上部
+          POSSEろご
+          4th week
+          記録・投稿→押すとモーダルが表示される
+      学習時間
+        Today
+        Month
+        Total
+      下部
+        2020年10月-->
+  <header class="header">
+    <img class="header_img" src="./img/POSSEロゴ.jpg" alt="POSSEロゴ">
+    <p>4th week</p>
+    <button id="headerButton" class="header_button">記録・投稿</button>
+  </header>
+  <div class="top">
+      <div class="left_side">
+        <!-- 学習時間 -->
+        <div class="learning_time">
+          <div class="learning_time_box">
+            <p class="learning_time_title">Today</p>
+            <p class="time">3</p>
+            <p class="unit">hour</p>
+          </div>
+          <div class="learning_time_box">
+            <p class="learning_time_title">Month</p>
+            <p class="time">120</p>
+            <p class="unit">hour</p>
+          </div>
+          <div class="learning_time_box">
+            <p class="learning_time_title">Total</p>
+            <p class="time">1348</p>
+            <p class="unit">hour</p>
+          </div>
+        </div>
+        <div class="bar_graph">
+          <img src="" alt="棒グラフ">
+        </div>
+      </div>
+
+      <div class="right_side">
+        <div class="graph_box">
+          <p class="graph_title">学習言語</p>
+          <img class="pie_chart" src="" alt="円グラフ">
+        </div>
+        <div class="graph_box">
+          <p class="graph_title">学習コンテンツ</p>
+          <img class="pie_chart" src="" alt="円グラフ">
+        </div>
+      </div>
+  </div>
+<!-- モーダル -->
+  <div class="modal">
+    <div class="modal_contents">
+      <div class="left_modal">
+        <!-- forでlabelタグとフォーム部品を関連付ける -->
+        <div class="study_day_form">
+          <label for="studyDay">学習日</label>
+          <input id="studyDay" class="study_day_text" type="text" name="studyDay"></input>
+        </div>
+        <div class="study_content_form">
+          <p>学習コンテンツ</p>
+          <label><input id="studyContent" type="radio" name="studyContent" value="N予備校">N予備校</label>
+          <label><input id="studyContent" type="radio" name="studyContent" value="ドットインストール">ドットインストール</label>
+          <label><input id="studyContent" type="radio" name="studyContent" value="POSSE課題">POSSE課題</label> 
+        </div>
+        <div class="study_language_form">
+          <p>学習言語（複数選択可）</p>
+          <label><input type="radio" name="studyLanguage" value="HTML">HTML</label>
+          <label><input type="radio" name="studyLanguage" value="CSS">CSS</label>
+          <label><input type="radio" name="studyLanguage" value="JavaScript">JavaScript</label>
+          <label><input type="radio" name="studyLanguage" value="PHP">PHP</label>
+          <label><input type="radio" name="studyLanguage" value="Laravel">Laravel</label>
+          <label><input type="radio" name="studyLanguage" value="SQL">SQL</label>
+          <label><input type="radio" name="studyLanguage" value="SHELL">SHELL</label>
+          <label><input type="radio" name="studyLanguage" value="情報システム基礎知識">情報システム基礎知識</label>
+         </div>
+         
+     </div>
+     <div class="right_modal">
+       <div>
+         <label for="studyTime">学習時間</label>
+         <input id="studyTime" type="text" name="studyTime"></input>
+       </div>
+       <div>
+         <label>Twitter用コメント</label>
+         <textarea></textarea>
+       </div>
+     </div>
+    </div>
+    <button id="modalButton" class="modal_button">記録・投稿</button>    
+  </div>
+  <footer>
+    <p>2020年10月</p>
+  </footer>
+</body>
+<script src="webapp.js"></script>
+</html>
