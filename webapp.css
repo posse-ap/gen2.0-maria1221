@@ -1,0 +1,126 @@
+
+/* ヘッダー */
+.header {
+  width: 100%;
+  top: 0;
+  background-color: white;
+  height: 64px;
+  display: flex;
+}
+
+.header_img {
+  margin-left: 40px;
+}
+header p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  color: #91B6CF;
+  font-size: 10px;
+}
+.header_button {
+  /* 背景をグラデーションにする */
+  background:linear-gradient(to right, #1072BD, #43D0FF);
+  color: white;
+  /* 右寄せにする margin-left: auto; */
+  margin: 10px 40px 10px auto;
+  /* 角を丸くする */
+  border-radius: 30px;
+  padding: 2px 30px;
+}
+
+body {
+  background-color: #F5F5F8;
+}
+.top {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* 学習時間 */
+
+.left_side {
+  width: 50%;
+}
+
+.learning_time {
+  display: flex;
+  /* flexBoxを右寄せにする */
+  justify-content: flex-end;
+  margin: 0 0 0 auto;
+  gap: 20px;
+  margin-right: 10px;
+}
+
+.learning_time_box{
+  background-color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 33.3%;
+  text-align: center;
+  /* 角を丸くする */
+  border-radius: 10px;
+  /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
+  box-shadow: 0px 4px 10px #a5a5a5;
+}
+
+.learning_time_title {
+  color: #4489C6;
+  margin: 10px;
+  font-size: 14px;
+}
+.time {
+  margin: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.unit {
+  color: #91B6CF;
+  margin: 10px;
+  font-size: 14px;
+}
+/* 棒グラフ */
+.bar_graph {
+  background-color: white;
+  margin-right: 10px;
+  border-radius: 10px;  
+  /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
+  box-shadow: 0px 4px 10px #a5a5a5;
+}
+
+.right_side {
+  width: 50%;
+  display: flex;
+  margin-left: 10px;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.graph_box {
+  background-color: white;
+  /* 角を丸くする */
+  border-radius: 10px;
+    /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
+  box-shadow: 0px 4px 10px #a5a5a5;
+  width: 50%;
+}
+
+.graph_title {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* .pie_chart {
+
+} */
+
+/* フッター */
+footer p {
+  position: absolute;
+  margin: 0 auto;
+  bottom: 0;
+}
