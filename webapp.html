@@ -64,49 +64,57 @@
         </div>
       </div>
   </div>
+
 <!-- モーダル -->
-  <div class="modal">
+  <div id="modalPage" class="modal_page">
+    <button id="morderCloseButton" class="modal_close_button">×</button>
     <div class="modal_contents">
       <div class="left_modal">
         <!-- forでlabelタグとフォーム部品を関連付ける -->
         <div class="study_day_form">
           <label for="studyDay">学習日</label>
-          <input id="studyDay" class="study_day_text" type="text" name="studyDay"></input>
+          <input id="studyDay" class="modal_text" type="text" name="studyDay"></input>
         </div>
-        <div class="study_content_form">
+        <div class="study_content_form checkbox">
           <p>学習コンテンツ</p>
-          <label><input id="studyContent" type="radio" name="studyContent" value="N予備校">N予備校</label>
-          <label><input id="studyContent" type="radio" name="studyContent" value="ドットインストール">ドットインストール</label>
-          <label><input id="studyContent" type="radio" name="studyContent" value="POSSE課題">POSSE課題</label> 
+          <input id="nSchool" type="checkbox" name="studyContent" value="N予備校"><label for="nSchool">N予備校</label>
+          <input id="dotInstall" type="checkbox" name="studyContent" value="ドットインストール"><label for="dotInstall">ドットインストール</label>
+          <input id="posseTask" type="checkbox" name="studyContent" value="POSSE課題"><label for="posseTask">POSSE課題</label>
         </div>
-        <div class="study_language_form">
+        <div class="study_language_form checkbox">
           <p>学習言語（複数選択可）</p>
-          <label><input type="radio" name="studyLanguage" value="HTML">HTML</label>
-          <label><input type="radio" name="studyLanguage" value="CSS">CSS</label>
-          <label><input type="radio" name="studyLanguage" value="JavaScript">JavaScript</label>
-          <label><input type="radio" name="studyLanguage" value="PHP">PHP</label>
-          <label><input type="radio" name="studyLanguage" value="Laravel">Laravel</label>
-          <label><input type="radio" name="studyLanguage" value="SQL">SQL</label>
-          <label><input type="radio" name="studyLanguage" value="SHELL">SHELL</label>
-          <label><input type="radio" name="studyLanguage" value="情報システム基礎知識">情報システム基礎知識</label>
-         </div>
-         
+          <input id="html" type="checkbox" name="studyLanguage" value="HTML"><label for="html">HTML</label>
+          <input id="css" type="checkbox" name="studyLanguage" value="CSS"><label for="css">CSS</label>
+          <input id="javaScript" type="checkbox" name="studyLanguage" value="JavaScript"><label for="javaScript">JavaScript</label>
+          <input id="php" type="checkbox" name="studyLanguage" value="PHP"><label for="php">PHP</label>
+          <input id="laravel" type="checkbox" name="studyLanguage" value="Laravel"><label for="laravel">Laravel</label>
+          <input id="sql" type="checkbox" name="studyLanguage" value="SQL"><label for="sql">SQL</label>
+          <input id="shell" type="checkbox" name="studyLanguage" value="SHELL"><label for="shell">SHELL</label>
+          <input id="informationSystem" type="checkbox" name="studyLanguage" value="情報システム基礎知識"><label for="informationSystem">情報システム基礎知識</label>
+         </div>    
      </div>
      <div class="right_modal">
-       <div>
+       <div class="study_time_form">
          <label for="studyTime">学習時間</label>
-         <input id="studyTime" type="text" name="studyTime"></input>
+         <input id="studyTime" class="modal_text" type="text" name="studyTime"></input>
        </div>
-       <div>
-         <label>Twitter用コメント</label>
-         <textarea></textarea>
+       <div class="twitter_comment">
+         <label for="twitterComment">Twitter用コメント</label>
+         <input id="twitterComment" class="twitter_text" type="text" name="twitterComment"></input>
        </div>
-     </div>
+       <div class="twitter_share">
+          <input  id=twitterShare type="checkbox" name="TwitterShare" value="Twitterにシェアする"><label for="twitterShare">Twitterにシェアする</label>
+       </div>
+           </div>
     </div>
     <button id="modalButton" class="modal_button">記録・投稿</button>    
   </div>
-  <footer>
-    <p>2020年10月</p>
+  <!-- モーダルが開いている時に背景を暗くする -->
+  <div id="modalCover" class="modal_cover"></div>
+  <footer class="footer">
+    <button class="footer_left_button">＜</button>
+    <span>2020年10月</span>
+    <button class="footer_right_button">＞</button>
   </footer>
 </body>
 <script src="webapp.js"></script>
