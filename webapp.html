@@ -6,23 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="resetcss.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
   <link rel="stylesheet" href="webapp.css">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
   <title>Document</title>
 </head>
 
 <body>
-  <!-- トップページ、投稿完了画面、モーダル画面、エラー画面 -->
-  <!-- トップページ -->
-  <!--上部
-          POSSEろご
-          4th week
-          記録・投稿→押すとモーダルが表示される
-      学習時間
-        Today
-        Month
-        Total
-      下部
-        2020年10月-->
   <header class="header">
     <img class="header_img" src="./img/POSSEロゴ.jpg" alt="POSSEロゴ">
     <p>4th week</p>
@@ -64,6 +56,20 @@
         </div>
       </div>
   </div>
+<!-- エラー画面 -->
+<div class="error_block">
+  <header class="error_header">
+    <img class="header_img" src="./img/POSSEロゴ.jpg" alt="POSSEロゴ">
+    <p>4th week</p>
+  </header>
+  <div class="error">
+    <p>ERROR</p>
+    <p class="error_mark">！</p>
+    <p class="error_sentence">一時的にご利用できない状態です。<br>しばらく経ってから<br>再度アクセスしてください。</p>  
+  </div>
+ 
+
+</div>
 
 <!-- モーダル -->
   <div id="modalPage" class="modal_page">
@@ -71,9 +77,20 @@
     <div class="modal_contents">
       <div class="left_modal">
         <!-- forでlabelタグとフォーム部品を関連付ける -->
-        <div class="study_day_form">
-          <label for="studyDay">学習日</label>
-          <input id="studyDay" class="modal_text" type="text" name="studyDay"></input>
+          <!-- <input id="studyDay" class="modal_text" type="text" name="studyDay"></input> -->
+            <!-- モーダルのカレンダー -->
+        <div class="study_day_form calendar_box">
+            <div class="calendar">
+              <label for="studyDay">学習日</label>
+              <input id="studyDay" type="text" name="datepicker" class="datepicker modal_text" value="">
+              <!-- <input id="studyDay" type="text" name="datepicker" class="datepicker modal_text hasDatepicker" value=""> -->
+              
+              <div class="calendar_modal">
+              </div>
+            </div>
+        </div>
+        <div>
+          
         </div>
         <div class="study_content_form checkbox">
           <p>学習コンテンツ</p>
@@ -111,11 +128,16 @@
   </div>
   <!-- モーダルが開いている時に背景を暗くする -->
   <div id="modalCover" class="modal_cover"></div>
+ 
+
+
+
+  <!-- フッター -->
   <footer class="footer">
     <button class="footer_left_button">＜</button>
     <span>2020年10月</span>
     <button class="footer_right_button">＞</button>
   </footer>
+  <script src="webapp.js"></script>
 </body>
-<script src="webapp.js"></script>
 </html>
