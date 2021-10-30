@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="resetcss.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
   <link rel="stylesheet" href="webapp.css">
-  <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
-
+  <!-- 円グラフ -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <title>Document</title>
 </head>
 
@@ -41,18 +40,19 @@
           </div>
         </div>
         <div class="bar_graph">
-          <img src="" alt="棒グラフ">
+          <div class="chart_div" id="chart_div"></div>
         </div>
       </div>
 
       <div class="right_side">
         <div class="graph_box">
           <p class="graph_title">学習言語</p>
-          <img class="pie_chart" src="" alt="円グラフ">
+          <!-- 円グラフが左により続ける。助けて -->
+          <div id="donutchart_language"></div>
         </div>
         <div class="graph_box">
           <p class="graph_title">学習コンテンツ</p>
-          <img class="pie_chart" src="" alt="円グラフ">
+          <div id="donutchart_content"></div>
         </div>
       </div>
   </div>
@@ -67,27 +67,30 @@
     <p class="error_mark">！</p>
     <p class="error_sentence">一時的にご利用できない状態です。<br>しばらく経ってから<br>再度アクセスしてください。</p>  
   </div>
- 
-
+</div>
+<!-- 投稿完了画面 -->
+<div id="completeBlock" class="complete_block">
+  <button id="completeCloseButton" class="close_button">×</button>
+  <div class="complete">
+    <p>AWESOME!</p>
+    <p class="complete_mark"></p>
+    <p class="complete_sentence">記録・投稿<br>完了しました。</p>  
+  </div>
 </div>
 
 <!-- モーダル -->
   <div id="modalPage" class="modal_page">
-    <button id="morderCloseButton" class="modal_close_button">×</button>
+    <button id="modalCloseButton" class="close_button">×</button>
     <div class="modal_contents">
       <div class="left_modal">
         <!-- forでlabelタグとフォーム部品を関連付ける -->
           <!-- <input id="studyDay" class="modal_text" type="text" name="studyDay"></input> -->
             <!-- モーダルのカレンダー -->
-        <div class="study_day_form calendar_box">
-            <div class="calendar">
-              <label for="studyDay">学習日</label>
-              <input id="studyDay" type="text" name="datepicker" class="datepicker modal_text" value="">
+        <div class="study_day_form">
+              <label id="calendarLabel" class="calendar_label" for="studyDay">学習日
+                <input id="studyDay" type="date" name="calendar" value="" min="2021-01-01" max="2030-12-31">
               <!-- <input id="studyDay" type="text" name="datepicker" class="datepicker modal_text hasDatepicker" value=""> -->
-              
-              <div class="calendar_modal">
-              </div>
-            </div>
+              </label>
         </div>
         <div>
 
@@ -127,10 +130,17 @@
     <button id="modalButton" class="modal_button">記録・投稿</button>    
   </div>
   <!-- モーダルが開いている時に背景を暗くする -->
-  <div id="modalCover" class="modal_cover"></div>
+  <div id="cover" class="cover"></div>
  
-
-
+<!-- ロード画面
+<div id="loader-bg" class="is-hide">
+  <div id="loader" class="is-hide">
+      <p>
+          <img src="loading.png"><br>
+          NOW LOADING
+      </p>
+  </div>
+</div> -->
 
   <!-- フッター -->
   <footer class="footer">
