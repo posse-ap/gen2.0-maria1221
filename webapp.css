@@ -104,6 +104,8 @@ body {
   /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
   box-shadow: 0px 1px 3px #a5a5a5;
 }
+
+
 .chart_div {
   height: 100%;
   width: 100%;

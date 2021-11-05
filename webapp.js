@@ -113,82 +113,129 @@ function drawChartContent() {
   };
 
   var chart = new google.visualization.PieChart(document.getElementById('donutchart_content'));
-  chart.draw(data,google.charts.Bar.convertOptions(options));
+  // chart.draw(data,google.charts.Bar.convertOptions(options));
+  chart.draw(data, options);
 }
 
   
 // 棒グラフ
-google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawTitleSubtitle);
+// google.charts.load("current", {packages:['corechart', 'bar']});
+google.charts.load("current", {packages:['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
-function drawTitleSubtitle() {
+function drawChart() {
       var data = new google.visualization.DataTable();
-      data.addColumn('date');
-      data.addColumn('number');
-     
-      data.addRows([
-        [new Date(2021, 9, 01), 4],
-        [new Date(2021, 9, 02), 2],
-        [new Date(2021, 9, 03), 1],
-        [new Date(2021, 9, 04), 3],
-        [new Date(2021, 9, 05), 2],
-        [new Date(2021, 9, 06), 2],
-        [new Date(2021, 9, 07), 1],
-        [new Date(2021, 9, 08), 2],
-        [new Date(2021, 9, 09), 5],
-        [new Date(2021, 9, 10), 1],
-        [new Date(2021, 9, 11), 2],
-        [new Date(2021, 9, 12), 3],
-        [new Date(2021, 9, 13), 4],
-        [new Date(2021, 9, 14), 7],
-        [new Date(2021, 9, 15), 5],
-        [new Date(2021, 9, 16), 1],
-        [new Date(2021, 9, 17), 8],
-        [new Date(2021, 9, 18), 7],
-        [new Date(2021, 9, 19), 2],
-        [new Date(2021, 9, 20), 1],
-        [new Date(2021, 9, 21), 3],
-        [new Date(2021, 9, 22), 4],
-        [new Date(2021, 9, 23), 6],
-        [new Date(2021, 9, 24), 2],
-        [new Date(2021, 9, 25), 3],
-        [new Date(2021, 9, 26), 1],
-        [new Date(2021, 9, 27), 5],
-        [new Date(2021, 9, 28), 4],
-        [new Date(2021, 9, 29), 2],
-        [new Date(2021, 9, 30), 1],
-        [new Date(2021, 9, 31), 6],
+      // data.addColumn('date');
+      
+      data.addColumn('number', 'Day of Month');
+      data.addColumn('number', 'Study Hour');
+
+     data.addRows([
+        [1, 3], 
+        [2, 4],
+        [3, 5],
+        [4, 3],
+        [5, 0],
+        [6, 0],
+        [7, 4],
+        [8, 2],
+        [9, 2],
+        [10, 8],
+        [11, 8],
+        [12, 2],
+        [13, 2],
+        [14, 1],
+        [15, 7],
+        [16, 4],
+        [17, 4],
+        [18, 3],
+        [19, 3],
+        [20, 3],
+        [21, 2],
+        [22, 2],
+        [23, 6],
+        [24, 2],
+        [25, 2],
+        [26, 1],
+        [27, 1],
+        [28, 1],
+        [29, 7],
+        [30, 8]
       ]);
+
+      // data.addRows([
+      //   [new Date(2021, 9, 01), 4],
+      //   [new Date(2021, 9, 02), 2],
+      //   [new Date(2021, 9, 03), 1],
+      //   [new Date(2021, 9, 04), 3],
+      //   [new Date(2021, 9, 05), 2],
+      //   [new Date(2021, 9, 06), 2],
+      //   [new Date(2021, 9, 07), 1],
+      //   [new Date(2021, 9, 08), 2],
+      //   [new Date(2021, 9, 09), 5],
+      //   [new Date(2021, 9, 10), 1],
+      //   [new Date(2021, 9, 11), 2],
+      //   [new Date(2021, 9, 12), 3],
+      //   [new Date(2021, 9, 13), 4],
+      //   [new Date(2021, 9, 14), 7],
+      //   [new Date(2021, 9, 15), 5],
+      //   [new Date(2021, 9, 16), 1],
+      //   [new Date(2021, 9, 17), 8],
+      //   [new Date(2021, 9, 18), 7],
+      //   [new Date(2021, 9, 19), 2],
+      //   [new Date(2021, 9, 20), 1],
+      //   [new Date(2021, 9, 21), 3],
+      //   [new Date(2021, 9, 22), 4],
+      //   [new Date(2021, 9, 23), 6],
+      //   [new Date(2021, 9, 24), 2],
+      //   [new Date(2021, 9, 25), 3],
+      //   [new Date(2021, 9, 26), 1],
+      //   [new Date(2021, 9, 27), 5],
+      //   [new Date(2021, 9, 28), 4],
+      //   [new Date(2021, 9, 29), 2],
+      //   [new Date(2021, 9, 30), 1],
+      //   [new Date(2021, 9, 31), 6],
+      // ]);
       var options = {
         legend:
         { position: 'none'},
-        chartArea:{width:'100%',height:'5%'},
+        chartArea:{width:'80%',height:'80%'},
         hAxis: {
-          showTextEvery: 2,
-          format: 'd',
-          viewWindow: {
-             min: new Date(2021, 9, 01), 
-             max: new Date(2021, 9, 31)
+          title: "",
+          textStyle: {
+            color: '#b8cddf'
           },
+          ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
+          gridlines: {color: 'none'},
+
         },
         vAxis: {
-          showTextEvery: 1,
+          ticks: [0, 2, 4, 6, 8],
+          // showTextEvery: 1,
           gridlines: {color: 'none'},
           format: '#h',
+          textStyle: {
+            color: '#b8cddf'
+          },
+          baselineColor: 'transparent',  
         },
-
-        colors: '#0f71bc' 
-          //どうやってグラデーションにするの？ 
+        maintainAspectRatio: false,
+        // colors: '#0f71bc' 
+        colors:['#0f71bc'],
+        //どうやってグラデーションにするの？ →できないらしい
      };
      
-      var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
-      materialChart.draw(data, google.charts.Bar.convertOptions(options));
+      // var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+      // materialChart.draw(data, google.charts.Bar.convertOptions(options));
+      
+      var materialChart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      materialChart.draw(data, options);
   }
         
   // onReSizeイベント  画面のサイズの変更に対応 
 window.onresize = function(){
   drawChartLanguage();
   drawChartContent();
-  drawTitleSubtitle();
+  drawChart();
 }
     // optionの変更が反映されない→materialChart.draw(data, options); を      materialChart.draw(data, google.charts.Bar.convertOptions(options)); に変更
