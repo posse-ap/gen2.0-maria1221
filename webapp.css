@@ -128,29 +128,60 @@ body {
     /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
   box-shadow: 0px 1px 3px #a5a5a5;
   width: 50%;
-
+  padding: 10px;
 }
-
-/* 棒グラフ */
-
-
-/* #donutchart_language {
-  overflow: hidden;
-}
-rect {
-  fill: none;
-} */
-
 
 .graph_title {
   margin-top: 20px;
   margin-left: 20px;
   font-size: 14px;
   font-weight: bold;
-  /* text-align: left !important; */
-
+}
+.all_legends li {
+  display: inline-block;
+  padding: 5px;
+}
+.legends_list::before{
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+.JavaScript::before {
+  background-color: #0345EC;
+}
+.CSS::before {
+  background-color: #0F71BD;
+}
+.PHP::before {
+  background-color: #20BDDE;
+}
+.HTML::before {
+  background-color: #3CCEFE;
+}
+.Laravel::before {
+  background-color: #B29EF3;
+}
+.SQL::before {
+  background-color: #6D46EC;
+}
+.SHELL::before {
+  background-color: #4A17EF;
+}
+.information_system::before {
+  background-color: #3105C0;
 }
 
+.dotInstall::before{
+  background-color: #0345EC;
+}
+.n_yobikou::before {
+  background-color: #0F71BD;
+}
+.posse_task::before {
+  background-color: #20BDDE;
+}
 /* エラー画面 */
 .error_block {
   position: absolute;
@@ -299,14 +330,21 @@ rect {
   margin-right: 56px;
 }
 .modal_button {
-  display: block;
+  /* display: block; */
+  position: absolute;
   background:linear-gradient(to right, #1072BD, #43D0FF);
   color: white;
   border-radius: 30px;
   padding: 10px 100px;
-  margin: 0 auto;
+  text-align: center;
+  width: 300px;
+  height: 50px;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%);
+  /* margin: 0 auto; */
       /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
-      box-shadow: -1px 3px 10px #6bc3e0;
+  box-shadow: -1px 3px 10px #6bc3e0;
 }
 
 /* チェックボックス */

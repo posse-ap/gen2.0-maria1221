@@ -47,15 +47,31 @@
       <div class="right_side">
         <div class="graph_box">
           <p class="graph_title">学習言語</p>
-          <!-- 円グラフが左により続ける。助けて -->
+          <!-- 円グラフ -->
           <div id="donutchart_language"></div>
+            <ul class="all_legends">
+              <li class="legends_list JavaScript">JavaScript</li>
+              <li class="legends_list CSS">CSS</li>
+              <li class="legends_list PHP">PHP</li>
+              <li class="legends_list HTML">HTML</li>
+              <li class="legends_list Laravel">Laravel</li>
+              <li class="legends_list SQL">SQL</li>
+              <li class="legends_list SHELL">SHELL</li>
+              <li class="legends_list information_system">情報システム基礎知識(その他)</li>
+            </ul>
         </div>
         <div class="graph_box">
           <p class="graph_title">学習コンテンツ</p>
           <div id="donutchart_content"></div>
+          <ul class="all_legends">
+            <li class="legends_list dotInstall">ドットインストール</li>
+            <li class="legends_list n_yobikou">N予備校</li>
+            <li class="legends_list posse_task">POSSE課題</li>
+          </ul>
         </div>
       </div>
-  </div>
+
+    </div>
 <!-- エラー画面 -->
 <div class="error_block">
   <header class="error_header">
@@ -77,6 +93,15 @@
     <p class="complete_sentence">記録・投稿<br>完了しました。</p>  
   </div>
 </div>
+<!-- フッター -->
+<footer class="footer">
+  <div class="footer_date">
+    <button class="footer_left_button">＜</button>
+    <span>2020年10月</span>
+    <button class="footer_right_button">＞</button>
+  </div>
+  <button id="footerButton" class="footer_button">記録・投稿</button>
+</footer>
 
 <!-- モーダル -->
   <div id="modalPage" class="modal_page">
@@ -120,17 +145,17 @@
        </div>
        <div class="twitter_comment">
          <label for="twitterComment">Twitter用コメント</label>
-         <input id="twitterComment" class="twitter_text" type="text" name="twitterComment"></input>
+         <textarea id="twitterComment" class="twitter_text" type="text" name="twitterComment"                       
+         ></textarea>
        </div>
        <div class="twitter_share">
-          <input  id=twitterShare type="checkbox" name="TwitterShare" value="Twitterにシェアする"><label for="twitterShare">Twitterにシェアする</label>
+          <input id="twitterShare" type="checkbox" name="TwitterShare" value="Twitterにシェアする"><label for="twitterShare">Twitterにシェアする</label>
        </div>
-           </div>
     </div>
     <button id="modalButton" class="modal_button">記録・投稿</button>    
   </div>
   <!-- モーダルが開いている時に背景を暗くする -->
-  <div id="cover" class="cover"></div>
+  <!-- <div id="cover" class="cover"></div> -->
  
 <!-- ロード画面
 <div id="loader-bg" class="is-hide">
@@ -142,16 +167,7 @@
   </div>
 </div> -->
 
-  <!-- フッター -->
-  <footer class="footer">
-    <div class="footer_date">
-      <button class="footer_left_button">＜</button>
-      <span>2020年10月</span>
-      <button class="footer_right_button">＞</button>
-    </div>
-    
-    <button id="footerButton" class="footer_button">記録・投稿</button>
-  </footer>
+
   <script src="webapp.js"></script>
 </body>
 </html>

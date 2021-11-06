@@ -1,29 +1,29 @@
 let headerButton = document.getElementById("headerButton");
 headerButton.onclick = function () {
   modalPage.style.display = "block";
-  cover.style.display = "block";
+  // cover.style.display = "block";
 }
 let footerModalButton = document.getElementById("footerButton");
 footerModalButton.onclick = function () {
   modalPage.style.display = "block";
-  cover.style.display = "block";
+  // cover.style.display = "block";
 }
 let modalCloseButton = document.getElementById("modalCloseButton");
 modalCloseButton.onclick = function () {
   modalPage.style.display = "none";
-  cover.style.display = "none";
+  // cover.style.display = "none";
 }
 
 let modalButton = document.getElementById('modalButton');
 modalButton.onclick = function () {
   completeBlock.style.display = "block";
-  cover.style.display = "block";
+  // cover.style.display = "block";
 }
 let completeCloseButton = document.getElementById("completeCloseButton");
 completeCloseButton.onclick = function () {
   completeBlock.style.display = "none";
   modalPage.style.display = "none";
-  cover.style.display = "none";
+  // cover.style.display = "none";
 }
 
 
@@ -71,14 +71,14 @@ function drawChartLanguage() {
     legend:
         { position: 'none'},
     slices: {
-      0: {color: 'blue'},
-      1: {color: 'purple'},
-      2: {color: 'skyblue'},
-      3: {color: 'red'},
-      4: {color: 'yellow'},
-      5: {color: 'green'},
-      6: {color: 'black'},
-      7: {color: 'pink'}
+      0: {color: '#0345EC'},
+      1: {color: '#0F71BD'},
+      2: {color: '#20BDDE'},
+      3: {color: '#3CCEFE'},
+      4: {color: '#B29EF3'},
+      5: {color: '#6D46EC'},
+      6: {color: '#4A17EF'},
+      7: {color: '#3105C0'}
     },
     pieSliceBorderColor:  'none'
   };
@@ -103,11 +103,9 @@ function drawChartContent() {
         { position: 'none'},
     chartArea:{width:'100%',height:'100%'},
     slices: {
-      0: {color: 'blue'},
-      1: {color: 'purple'},
-      2: {color: 'skyblue'},
-      3: {color: 'red'},
-      4: {color: 'yellow'},
+      0: {color: '#0345EC'},
+      1: {color: '#0F71BD'},
+      2: {color: '#20BDDE'},
     },
     pieSliceBorderColor: 'none'
   };
@@ -162,40 +160,6 @@ function drawChart() {
         [29, 7],
         [30, 8]
       ]);
-
-      // data.addRows([
-      //   [new Date(2021, 9, 01), 4],
-      //   [new Date(2021, 9, 02), 2],
-      //   [new Date(2021, 9, 03), 1],
-      //   [new Date(2021, 9, 04), 3],
-      //   [new Date(2021, 9, 05), 2],
-      //   [new Date(2021, 9, 06), 2],
-      //   [new Date(2021, 9, 07), 1],
-      //   [new Date(2021, 9, 08), 2],
-      //   [new Date(2021, 9, 09), 5],
-      //   [new Date(2021, 9, 10), 1],
-      //   [new Date(2021, 9, 11), 2],
-      //   [new Date(2021, 9, 12), 3],
-      //   [new Date(2021, 9, 13), 4],
-      //   [new Date(2021, 9, 14), 7],
-      //   [new Date(2021, 9, 15), 5],
-      //   [new Date(2021, 9, 16), 1],
-      //   [new Date(2021, 9, 17), 8],
-      //   [new Date(2021, 9, 18), 7],
-      //   [new Date(2021, 9, 19), 2],
-      //   [new Date(2021, 9, 20), 1],
-      //   [new Date(2021, 9, 21), 3],
-      //   [new Date(2021, 9, 22), 4],
-      //   [new Date(2021, 9, 23), 6],
-      //   [new Date(2021, 9, 24), 2],
-      //   [new Date(2021, 9, 25), 3],
-      //   [new Date(2021, 9, 26), 1],
-      //   [new Date(2021, 9, 27), 5],
-      //   [new Date(2021, 9, 28), 4],
-      //   [new Date(2021, 9, 29), 2],
-      //   [new Date(2021, 9, 30), 1],
-      //   [new Date(2021, 9, 31), 6],
-      // ]);
       var options = {
         legend:
         { position: 'none'},
@@ -238,4 +202,19 @@ window.onresize = function(){
   drawChartContent();
   drawChart();
 }
-    // optionの変更が反映されない→materialChart.draw(data, options); を      materialChart.draw(data, google.charts.Bar.convertOptions(options)); に変更
+
+// Twitter投稿
+let twitterShareButton = document.getElementById('twitterShare');
+
+  document.getElementById("modalButton").addEventListener('click', function(event) {
+    // aタグが何も指定されていないときにトップに戻ることを防ぐ
+    event.preventDefault();
+    if (twitterShareButton.checked) {
+    window.open(
+      "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitterComment").value),
+      null)}
+  });
+ 
+
+
+
