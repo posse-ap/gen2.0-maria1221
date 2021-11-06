@@ -1,54 +1,31 @@
 let headerButton = document.getElementById("headerButton");
 headerButton.onclick = function () {
   modalPage.style.display = "block";
-  // cover.style.display = "block";
+  cover.style.display = "block";
 }
 let footerModalButton = document.getElementById("footerButton");
 footerModalButton.onclick = function () {
   modalPage.style.display = "block";
-  // cover.style.display = "block";
+  cover.style.display = "block";
 }
 let modalCloseButton = document.getElementById("modalCloseButton");
 modalCloseButton.onclick = function () {
   modalPage.style.display = "none";
-  // cover.style.display = "none";
+  cover.style.display = "none";
 }
 
-let modalButton = document.getElementById('modalButton');
-modalButton.onclick = function () {
-  completeBlock.style.display = "block";
-  // cover.style.display = "block";
-}
+// let modalButton = document.getElementById('modalButton');
+// modalButton.onclick = function () {
+//   completeBlock.style.display = "block";
+
+// }
 let completeCloseButton = document.getElementById("completeCloseButton");
 completeCloseButton.onclick = function () {
   completeBlock.style.display = "none";
   modalPage.style.display = "none";
-  // cover.style.display = "none";
+  cover.style.display = "none";
 }
 
-
-
-
-// let bg = document.getElementById('loader-bg'),
-//     loader = document.getElementById('loader');
-// modalButton.onclick = function () {
-//   bg.style.display = 
-// }
-/* ロード画面の非表示を解除 */
-// bg.classList.remove('is-hide');
-// loader.classList.remove('is-hide');
-
-// /* 読み込み完了 */
-// window.addEventListener('load', stopload);
-
-// /* 10秒経ったら強制的にロード画面を非表示にする */
-// setTimeout('stopload()',10000);
-
-// /* ロード画面を非表示にする処理 */
-// function stopload(){
-//     bg.classList.add('fadeout-bg');
-//     loader.classList.add('fadeout-loader');
-// }
 
 // 円グラフ
 google.charts.load("current", {packages:["corechart"]});
@@ -101,7 +78,7 @@ function drawChartContent() {
     pieHole: 0.5,
     legend:
         { position: 'none'},
-    chartArea:{width:'100%',height:'100%'},
+    chartArea:{width:'100%',height: '100%'},
     slices: {
       0: {color: '#0345EC'},
       1: {color: '#0F71BD'},
@@ -212,9 +189,17 @@ let twitterShareButton = document.getElementById('twitterShare');
     if (twitterShareButton.checked) {
     window.open(
       "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("twitterComment").value),
-      null)}
+      null)} else {
+        // 3秒経過後に投稿完了画面を出す
+        loader.style.display = "block";
+        window.setTimeout(complete, 3000);
+        function complete() {
+          loader.style.display ="none"
+          completeBlock.style.display = "block";
+          cover.style.display = "block";
+        }
+      }
   });
  
-
 
 

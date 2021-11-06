@@ -1,5 +1,13 @@
-
-
+.container {
+  min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+  position: relative;/* ←相対位置 */
+  padding-bottom: 60px; /* ←フッターの高さを指定 */
+  box-sizing: border-box;
+  /* ↑ヘッダーやフッターを含むすべての要素の高さ＝min-height:100vhになるように指定 */
+}
+.top {
+  display: flex;
+}
 /* ヘッダー */
 .header {
   width: 100%;
@@ -37,19 +45,13 @@ header p {
 
 body {
   background-color: #F5F5F8;
+}
 
-}
-.top {
-  position: relative;
-  height: 100%;
-  display: flex;
-  width: 80%;
-  margin: 0 auto;
-}
 
 /* 学習時間 */
 
 .left_side {
+
   width: 50%;
   margin-top: 20px;
   margin-right: 10px;
@@ -93,16 +95,17 @@ body {
 
 /* 棒グラフ */
 .bar_graph {
-  position: absolute;
-  bottom: 0;
   width: 100%;
-  top: 120px;
+  height: 450px;
+  margin-top: 12px;
   background-color: white;
   padding: 10px;
   /* 角を丸く */
   border-radius: 10px;  
   /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
-  box-shadow: 0px 1px 3px #a5a5a5;
+  box-shadow: 0px 1px 3px #a88383;
+  /* position: absolute; */
+  /* bottom: 0; */
 }
 
 
@@ -118,7 +121,7 @@ body {
   margin-left: 10px;
   gap: 20px;
   margin-top: 20px;
-  height: 80vh;
+  height: 79.2vh;
 }
 
 .graph_box {
@@ -468,12 +471,6 @@ body {
 .study_time_form input {
   margin-top: 5px;
 }
-/* 
-円グラフ
-.pie_chart {
-  width: 900px; 
-  height: 500px;
-} */
 
 /* ツイッター用コメント */
 .twitter_comment {
@@ -652,66 +649,158 @@ input[type="date"]::-webkit-calendar-picker-indicator{
   margin-top: 30px;
 }
 
+/* ロード画面 */
+.loader_content {
+  display: none;
+  background-color: white;
+  width: 900px;
+  height: 600px;
+  border-radius: 20px;
+  margin: 0 auto;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  z-index: 110;
+}
+.loader {
+  top: 40%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  font-size: 10px;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: #ffffff;
+  background: -moz-linear-gradient(to right, #1072BD, #43D0FF);
+  background: -webkit-linear-gradient(to right, #1072BD, #43D0FF);
+  background: -o-linear-gradient(to right, #1072BD, #43D0FF);
+  background: -ms-linear-gradient(to right, #1072BD, #43D0FF);
+  background: linear-gradient(to right, #1072BD, #43D0FF);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #ffffff;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+.loader:after {
+  background: #ffffff;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 
 
 
 
 /* スマホ レスポンシブ対応 700px以下の場合 */
 @media screen and (max-width: 700px) {
+  .container {
+    min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+    position: relative;/* ←相対位置 */
+    padding-bottom: 60px; /* ←フッターの高さを指定 */
+    box-sizing: border-box;
+    /* ↑ヘッダーやフッターを含むすべての要素の高さ＝min-height:100vhになるように指定 */
+  }
+  .top {
+    display: block;
+    height: 100%;
+  }
   .header {
-
     width: 100%;
     top: 0;
     background-color: white;
     height: 64px;
     display: flex;
   }
+ 
   .header_img {
     margin-left: 20px;
   }
   .header_button {
   display: none;
   }
- 
-  .top {
-    display: block;
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    /* margin: 0 20px; */
-  }
   .left_side {
-    display: block;
     width: auto;
+    height: 25vh;
     margin-left: 20px;
     margin-right: 20px;
     top: 0;
     margin-top: 0;
-    height: 40vh;
+    margin-bottom: 16px;
   }
   .learning_time {
-    /* width: 100%; */
+    height: 90px;
     gap: 16px;
     /* 中央にする */
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 16px;
   }
-  .bar_graph {
-    margin-top: 16px;
-    /* height: 200px; */
+  .bar_graph{
+    height: 100px;
   }
+
   .right_side {
+    display: flex;
     width: auto;
+    left: 20px;
+    right: 20px;
+    margin: 0;
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 16px;
     margin-bottom: 16px;
     gap: 16px;
-    height: 30vh;
+    height: 50vh;
   }
   .graph_box {
     margin-top: 0;
+    margin-bottom: 0;
+    font-size: 3px;
+  }
+  .graph_title {
+    margin-top: 5px;
   }
   .calendar_label::before {
     width: 150px;
@@ -722,13 +811,89 @@ input[type="date"]::-webkit-calendar-picker-indicator{
   input[type="date"]::-webkit-datetime-edit{
     padding: 12px 30px;
   }
- 
+  .calendar_label::before {
+    width: 100%;
+    height: 40px;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator{
+    width: 100%;
+    height: 40px;
+  }
+  .study_content_form p {
+    margin-top: 24px;
+  }
+  .study_content_form label {
+    margin-right: 8px;
+    margin-top: 8px;
+  }
+  .study_language_form {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  .study_language_form label {
+    margin-right: 8px;
+  }
+  .study_time_form {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .study_time_form label {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .study_time_form input {
+    margin-top: 0;
+  }
+  .twitter_comment {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .twitter_comment p {
+    margin-bottom: 10px;
+  }
+  .twitter_text {
+    height: 30px;
+  }
+  .twitter_share {
+    margin-bottom: 0;
+  }
+  .twitter_share label {
+    margin-top: 10px;
+    margin-bottom: 22px;
+  }
+
+  .modal_page {
+    width: 100%;
+    height: 90%;
+  }
+  .modal_contents {
+    display: block;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .left_modal {
+    margin: 0;
+    width: 100%;
+  }
+  .study_day_form {
+    width: 100%;
+  }
+  .right_modal {
+    margin: 0;
+    width: 100%;
+  }
+  .complete_block {
+    width: 100%;
+    height: 90%;
+  }
+
   .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+    margin-bottom: 20px;
     text-align: center;
-    padding: 20px;
+    /* padding: 20px; */
   }
 
   .footer_left_button {
@@ -738,8 +903,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{
     font-size: 2px;
   }
   .footer_date{
-    margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
   .footer_button {
     display: block;
@@ -751,54 +915,4 @@ input[type="date"]::-webkit-calendar-picker-indicator{
     padding-top: 10px;
     padding-bottom: 10px;
   }
-}
-
-/* ロード画面 */
-/* 非表示 */
-.is-hide {
-  display: none;
-}
-/* ローディング画面をフェードアウト */
-.fadeout-bg {
-  transition-property: opacity;
-  transition-delay: .9s;
-  transition-duration: .8s;
-  opacity: 0;
-  pointer-events: none;
-}
-/* ローダーをフェードアウト */
-.fadeout-loader {
-  transition-property: opacity;
-  transition-delay: .9s;
-  transition-duration: .3s;
-  opacity: 0;
-  pointer-events: none;
-}
-/* ローディング画面 */
-#loader-bg {
-  background: #ffffff;
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-}
-#loader {
-  height: 120px;
-  left: 50%;
-  margin-left: -60px;
-  margin-top: -60px;
-  position: fixed;
-  top: 50%;
-  width: 120px;
-}
-#loader p {
-  color: #454545;
-  font-size: 10px;
-  line-height: 1.4;
-  text-align: center;
-}
-#loader p img {
-  display: inline-block;
 }
