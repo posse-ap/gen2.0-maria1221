@@ -6,7 +6,7 @@ headerButton.onclick = function () {
 let footerModalButton = document.getElementById("footerButton");
 footerModalButton.onclick = function () {
   modalPage.style.display = "block";
-  cover.style.display = "block";
+  // cover.style.display = "block";
 }
 let modalCloseButton = document.getElementById("modalCloseButton");
 modalCloseButton.onclick = function () {
@@ -43,7 +43,7 @@ function drawChartLanguage() {
   ]);
 
   var options = {
-    chartArea:{width:'100%',height:'100%'},
+    chartArea:{width:'90%',height:'100%'},
     pieHole: 0.5,
     legend:
         { position: 'none'},
@@ -78,7 +78,7 @@ function drawChartContent() {
     pieHole: 0.5,
     legend:
         { position: 'none'},
-    chartArea:{width:'100%',height: '100%'},
+    chartArea:{width:'90%',height: '100%'},
     slices: {
       0: {color: '#0345EC'},
       1: {color: '#0F71BD'},
