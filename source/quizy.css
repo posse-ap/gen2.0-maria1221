@@ -18,7 +18,7 @@
     margin: auto;
     max-width: max-content;
   }
-   
+
   .question {
     margin: 30px 10px 30px 10px;
   } 
@@ -35,7 +35,7 @@
     font-weight: bold;
     width: 630px;
   }
-  
+  /* widthを％指定してください */
   .correct {
       background-color: skyblue;
       color: white;
