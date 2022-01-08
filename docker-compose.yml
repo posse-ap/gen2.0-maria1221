@@ -33,7 +33,7 @@ services:
             - ./mysql/sql:/docker-entrypoint-initdb.d
 
             # imageは最初に書くべき
-            # build: ./mysql/　mysqlフォルダの下のドッカーファイルをビルドする
+            # build: ./mysql/mysqlフォルダの下のドッカーファイルをビルドする
 
 
 
