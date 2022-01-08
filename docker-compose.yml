@@ -20,15 +20,20 @@ services:
         image: mysql:latest
         environment:
         # MYSQLコンテナ作成時に初期作成されるデータベースの名前やユーザ。パスワードの設定
-            MYSQL_DATABASE: laravel_sample_db
+        # ユーザー名やデータベース名を変えたら、docker-compose build --no-cache　でキャッシュを消す
+            MYSQL_DATABASE: quizy_db
             MYSQL_ROOT_PASSWORD: password
-            MYSQL_USER: laravel_sample_user
+            MYSQL_USER: maria
             MYSQL_PASSWORD: password
             TZ: Asia/Tokyo
         ports:
             - 3306:3306
         volumes:
-            - ./mysql/data:/var/lib/mysql
+            # - ./mysql/data:/var/lib/mysql dataを手元に持つため。docker-composeするたびにdataフォルダが作られるけど、毎回立ち上げるたびに消さなきゃいけないからいらなくない？
             - ./mysql/sql:/docker-entrypoint-initdb.d
+
+            # imageは最初に書くべき
+            # build: ./mysql/　mysqlフォルダの下のドッカーファイルをビルドする
+
 
 

@@ -13,5 +13,5 @@ try {
         [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
     ) catch (PDOException $e) {
       // エラー発生
-      echo $e->getMessage();
-  } 
+        echo $e->getMessage();
+} 
