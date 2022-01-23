@@ -7,7 +7,7 @@
 // コンストラクタ(インスタンスを生成する際(newを行う際)に最初に実行される関数)
 
 //$ pdo = new PDO($dsn, $username, $password, $driver_options);
-// $dsn データベースに接続するために必要な情報。　mysql:dbname=test;host=localhost;charset=utf8mb4
+// $dsn データベースに接続するために必要な情報。 mysql:dbname=test;host=localhost;charset=utf8mb4
 // $username ユーザー名。ルート権限を使う場合はroot
 // $password パスワード。ルート権限を使う場合は空白
 // $driver_options 接続時のオプションを連想配列で渡す。
@@ -31,6 +31,3 @@ try {
         echo $e->getMessage();
         exit;     // プログラムを終了する
 };
-
-
-
