@@ -20,12 +20,13 @@ $id = $_GET["id"];
 $stmt0 = $pdo->prepare("SELECT * FROM big_questions WHERE id = ?");
 // id=?→特定の値にしない→変数的な感じ
 $stmt1 = $pdo->prepare("SELECT * FROM choices");
-// $stmt2 = $pdo->prepare("SELECT questions_id,COUNT(questions_id) FROM choices GROUP BY questions_id");
+// $stmt2 = $pdo->prepare("SELECT questions_id FROM choices");
 for ($i = 0; $i < 2; $i++) {
   ${"stmt".$i}->execute([$id]);
   ${"data" . $i} = ${"stmt" . $i}->fetchAll();
 };
 echo $data0[0]["name"];// 東京の難読地名クイズ
+// echo $data1[0]["name"];//たかなわ
 // fetchAll(); SQLの結果をすべて一度に受け取る
 // PHPでデータベースの検索結果を受け取ってPHPの中のプログラムの中で利用するには、データベースから受け取ったデータを全て1つの配列に入れ、それをPHPのプログラム内で加工する方法
 // $area = $stmt->fetchAll();
@@ -63,14 +64,12 @@ echo $data0[0]["name"];// 東京の難読地名クイズ
   // $selects =<ul id='choices'></ul>
   
 
+
 $choiceArray = [];
 for ($i = 0; $i < 6; $i++){
   array_push($choiceArray, $data1[$i]["name"]);
-  // $selects =
-  // "<li class='choice'>" 
-  // . $choiceArray[$i] 
-  // . "</li>";
-  // echo($selects);
+  // 問題の選択肢を追加
+  // $data1[1]["nama"] は たかなわ
 }
 for ($i = 0; $i < 10; $i++) {
   $h = $i + 1;
@@ -81,9 +80,9 @@ for ($i = 0; $i < 10; $i++) {
     . "</h2>"
     . "<img src='./image/$h.png' alt=問いとなる地名の画像/>"
     . "<ul id='choices$i'>";
-    for ($j = 0; $j < 3; $j++){
-    $main .= "<li class='choice'>$choiceArray[$j]</li>";
-    }
+      for ($j = $i; $j < count($choiceArray); $j++) {
+        $main .= "<li class='choice'>$choiceArray[$j]</li>";
+      }
     $main .= "</ul>"
     . "</div>";
     echo($main);
