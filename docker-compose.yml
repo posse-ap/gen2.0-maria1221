@@ -29,13 +29,13 @@ services:
             MYSQL_PASSWORD: password
             TZ: Asia/Tokyo
         ports:
-            - 3306:3306
+            - 13306:3306
         volumes:
-            # - ./mysql/data:/var/lib/mysql dataを手元に持つため。docker-composeするたびにdataフォルダが作られるけど、毎回立ち上げるたびに消さなきゃいけないからいらなくない？
-            - ./mysql/sql:/docker-entrypoint-initdb.d
+            - ./mysql/data:/var/lib/mysql
+            - ./initdb.d:/docker-entrypoint-initdb.d
             - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
 
 
             # imageは最初に書くべき
             # build: ./mysql/mysqlフォルダの下のドッカーファイルをビルドする
-            
+            #  dataを手元に持つため。docker-composeするたびにdataフォルダが作られるけど、毎回立ち上げるたびに消さなきゃいけないからいらなくない？
