@@ -37,21 +37,22 @@ INSERT INTO questions(big_questions_id, image) VALUES
 CREATE TABLE choices (
   id INT NOT NULL PRIMARY KEY auto_increment,
   questions_id INT(10),
+  area_id INT(10),
   name VARCHAR(40),
   valid BOOL,
   index id_index (id)
 );
 
-INSERT INTO choices(questions_id, name, valid) VALUES
-(1, "たかなわ", TRUE),
-(1, "こうわ", FALSE),
-(1, "たかわ", FALSE),
-(2, "かめと", FALSE),
-(2, "かめど", FALSE),
-(2, "かめいど", TRUE),
-(3, "むこうひら", FALSE),
-(3, "むきひら", FALSE),
-(3, "むかいなだ", TRUE);
+INSERT INTO choices(questions_id, area_id, name, valid) VALUES
+(1, 1, "たかなわ", TRUE),
+(1, 1, "こうわ", FALSE),
+(1, 1, "たかわ", FALSE),
+(2, 1, "かめと", FALSE),
+(2, 1, "かめど", FALSE),
+(2, 1, "かめいど", TRUE),
+(3, 2, "むこうひら", FALSE),
+(3, 2, "むきひら", FALSE),
+(3, 2, "むかいなだ", TRUE);
 
 
 -- データベースが複数あるから、use データベース名;で指定してあげないとSELECT * FROM big_questions;は使えない
