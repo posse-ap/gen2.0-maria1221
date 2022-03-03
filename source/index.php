@@ -24,11 +24,10 @@ $stmt2 = $pdo->prepare("SELECT count(DISTINCT questions_id) FROM choices");
 // $stmt3 = $pdo->prepare("SELECT count(DISTINCT area_id) FROM choices"); 
 $stmt3 = $pdo->prepare("SELECT count(DISTINCT questions_id) FROM choices WHERE area_id = ?"); 
 $stmt4 = $pdo->prepare("SELECT * FROM choices WHERE area_id = ?");
-// $stmt5 = $pdo->prepare("SELECT name FROM choices WHERE questions_id = 1");
+$stmt5 = $pdo->prepare("SELECT DISTINCT questions_id FROM choices WHERE area_id = ?");
+$stmt6 = $pdo->prepare("SELECT MIN(questions_id) FROM choices WHERE area_id = ?");
 
-// $stmt5 = $pdo->prepare("SELECT count(area_id) FROM choices WHERE area_id = ?");
-
-for ($i = 0; $i < 5; $i++) {
+for ($i = 0; $i < 7; $i++) {
   ${"stmt" . $i}->execute([$id]);
   ${"data" . $i} = ${"stmt" . $i}->fetchAll();
 };
@@ -53,16 +52,17 @@ for ($i = 0; $i < 5; $i++) {
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <title>ガチで東京の人しか解けない。#<?php print_r($area[0]["name"])?> </title>
-    <link rel="stylesheet" href="resetCSS.css">
-    <link rel="stylesheet" href="quizy.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>ガチで東京の人しか解けない</title>
+<link rel="stylesheet" href="./resetCSS.css">
+<link rel="stylesheet" href="./quizy.css">
 </head>
-
 
 <body>
 <div class="quiz">
-<h1><?php echo $data0[0]["name"];// 東京の難読地名クイズ?></h1>
+<h1><?php echo $data0[0]["name"];?></h1>
 <?php 
 for ($i = 0; $i < $data3[0]["count(DISTINCT questions_id)"]; $i++) {
   $h = $i + 1;
@@ -76,24 +76,38 @@ for ($i = 0; $i < $data3[0]["count(DISTINCT questions_id)"]; $i++) {
   // $data2[0]["count(DISTINCT questions_id)"] 3 設問の数
   // 問題の選択肢を追加
   // $choice = $pdo->prepare("SELECT name FROM choices WHERE questions_id = $i+1");
-  for ($k = 0; $k <= $data3[0]["count(DISTINCT questions_id)"]; $k++) {
-    ${"choice" . $k} = $pdo->prepare("SELECT name FROM choices WHERE questions_id = $k+1");
-    ${"choice" . $k}->execute([$id]);
-    ${"choiceList" . $k} = ${"choice" . $k}->fetchAll();
+  $choiceArray = []; 
+  $x = $data6[0]["MIN(questions_id)"]; //id=1の時は0、id=2の時は3
+  echo  $data3[0]["count(DISTINCT questions_id)"];//id=1の時は2、id=2の時は1
+  for ($k = 1; $k <= $data3[0]["count(DISTINCT questions_id)"]; $k++) {
+    ${"choice" . $x} = $pdo->prepare("SELECT name FROM choices WHERE questions_id = $k");
+    ${"choice" . $x}->execute([$id]);
+    ${"choiceList" . $x} = ${"choice" . $x}->fetchAll();
+    array_push($choiceArray, ${"choiceList" . $x});
     }
+    // echo count($choiceArray[1]) . PHP_EOL;
+echo $choiceArray[0][0]["name"]; //たかなわ
+echo $choiceArray[1][0]["name"]; //かめと
+// echo $choiceArray[2][0]["name"]; //かめと
 
+  // $data2[0]["count(DISTINCT questions_id)"] id=1の時は2、id=2の時は1
   for ($j = 0; $j <  $data2[0]["count(DISTINCT questions_id)"]; $j++){
+    $questions_id = $data5[$i]["questions_id"]; 
+    // echo $questions_id;
     $main .= "<li class='choice'>" 
-    . ${"choiceList" . $i}[$j]["name"]
+    // . ${"choiceList" . $questions_id}[$j]["name"]
+    . $choiceArray[$questions_id-1][$j]["name"]
     . "</li>";
   }
     $main .= "</ul>"
     . "</div>";
     echo($main);
 } 
+
+
 ?>
 </div>
-  <!-- <script src="quizy.js"></script> -->
+  <script src="quizy.js"></script>                               
 </body>
 
 </html> 
