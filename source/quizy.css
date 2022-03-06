@@ -72,7 +72,9 @@
     width: 65px;
   }
   
-  
+  .img {
+    width: 100%;
+  }
   /* display: flex; 要素を横ならびにできる  */
   /* imgタグはinlineだからmargin: 0 auto;が効かない 
   displayの種類

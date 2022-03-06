@@ -18,8 +18,8 @@ CREATE TABLE big_questions (
 );
 
 INSERT INTO big_questions(name) VALUES 
-("東京の難読地名クイズ"),
-("広島県の難読地名クイズ");
+("東京"),
+("広島県");
 
 CREATE TABLE questions (
   id INT NOT NULL PRIMARY KEY auto_increment,
@@ -28,10 +28,10 @@ CREATE TABLE questions (
   index id_index (id)
 );
 
-INSERT INTO questions(big_questions_id, image) VALUES
-(1, "takanawa.png"),
-(1, "kameido.png"),
-(2, "mukainada.png");
+INSERT INTO questions(big_questions_id) VALUES
+(1),
+(1),
+(2);
 
 
 CREATE TABLE choices (
@@ -50,9 +50,9 @@ INSERT INTO choices(questions_id, area_id, name, valid) VALUES
 (2, 1, "かめと", FALSE),
 (2, 1, "かめど", FALSE),
 (2, 1, "かめいど", TRUE),
-(3, 2, "むこうひら", FALSE),
-(3, 2, "むきひら", FALSE),
-(3, 2, "むかいなだ", TRUE);
+(1, 2, "むこうひら", FALSE),
+(1, 2, "むきひら", FALSE),
+(1, 2, "むかいなだ", TRUE);
 
 
 -- データベースが複数あるから、use データベース名;で指定してあげないとSELECT * FROM big_questions;は使えない

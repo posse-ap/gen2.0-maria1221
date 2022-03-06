@@ -7,7 +7,7 @@ try {
         'password',
         [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
     );
-  } catch (PDOException $e) {
+    } catch (PDOException $e) {
         echo $e->getMessage();
         exit;     
 };
