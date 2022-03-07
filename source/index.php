@@ -67,82 +67,31 @@ $choices = $stmt->fetchAll();
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>ガチで<?php echo $data0[0]["name"]; ?>の人しか解けない</title>
+<title>ガチで<?php echo $title[0]["name"]; ?>の人しか解けない</title>
 <link rel="stylesheet" href="./resetCSS.css">
 <link rel="stylesheet" href="./quizy.css">
 </head>
 
 <body>
-<!-- <div class="quiz"> -->
-<?php foreach ($choices as $index => $choice) {
-  // $questions_id = $choice["id"];
-  // echo $questions_id;
-  // $area_name = $choice["name"];
-  // echo $area_name;
-  ?>
-  <?php if(($index . 1) % 3 == 1) { ?>
-  <div>
-  <?php
-  echo $choices[$index]["questions_id"] . ". この地名はなんて読む？"; //問題番号
-  ?>
-  <!-- 現状$questions_idが7→0にしたい -->
-  <img src="./image/<?php echo $id; ?>-<?php echo $choices[$index]["questions_id"]; ?>.png" alt="問いとなる地名の画像"/>
-<?php } ?>
-<ul>
-<li class='choice'> <?php echo $choice["name"]; ?></li>
-</ul>
+<div class="container">
+<h1 class="title">
+  <?php if($id == 1){ ?> 
+  ガチで<?php echo $title[0]["name"]; ?>の人しか解けない！
+  <?php } else { 
+    echo $title[0]["name"]; ?>県民なら解けて当然？
+  <?php } ?>
+  #<?php echo $title[0]["name"]; ?>の難読地名クイズ</h1>
+  <?php foreach ($choices as $index => $choice) { 
+    if(($index . 1) % 3 == 1) { ?>
+    <h2 class="underline"><?php echo $choices[$index]["questions_id"] . ". この地名はなんて読む？"; ?> </h2>
+        <img class="question_img" src="./image/<?php echo $id; ?>-<?php echo $choices[$index]["questions_id"]; ?>.png" alt="問いとなる地名の画像"/>
+    <?php } ?>  
+        <ul>
+          <li class='choice'> <?php echo $choice["name"]; ?></li>
+        </ul>
+    <?php } ?>
 </div>
-<?php } ?>
-
-<?php 
-
-// for($i = 0; $i < $choices)
-// 3で割った時に余りがない 0
-for ($i = 0; $i < $data3[0]["count(DISTINCT questions_id)"]; $i++) {
-  // $h = $i + 1;
-  foreach($numbers as $number) {
-
-  }
-  $main =
-    "<div class='question'>" 
-    . "<h2 class='underline'>"
-    . "{}. この地名はなんて読む？"
-    . "</h2>"
-    . "<img src='./image/$h.png' alt=問いとなる地名の画像/>"
-    . "<ul id='choices'>";
-  // $data2[0]["count(DISTINCT questions_id)"] 3 設問の数
-  // 問題の選択肢を追加
-  // $choice = $pdo->prepare("SELECT name FROM choices WHERE questions_id = $i+1");
-  // $choiceArray = []; 
-  // $x = $data6[0]["MIN(questions_id)"]; //id=1の時は0、id=2の時は3
-  // echo  $data3[0]["count(DISTINCT questions_id)"];//id=1の時は2、id=2の時は1
-  // for ($k = 1; $k <= $data3[0]["count(DISTINCT questions_id)"]; $k++) {
-  //   ${"choice" . $x} = $pdo->prepare("SELECT name FROM choices WHERE questions_id = $k");
-  //   ${"choice" . $x}->execute([$id]);
-  //   ${"choiceList" . $x} = ${"choice" . $x}->fetchAll();
-  //   array_push($choiceArray, ${"choiceList" . $x});
-  //   }
-//  idが1の時はarea_id=1のものを持ってくる、2の時はarea_id=2のものをもってくるif文
-// area_id=$id
-  // $data2[0]["count(DISTINCT questions_id)"] id=1の時は2、id=2の時は1
-  for ($j = 0; $j <  $data2[0]["count(DISTINCT questions_id)"]; $j++){
-    $questions_id = $data5[$i]["questions_id"]; 
-    // echo $questions_id;
-    $main .= "<li class='choice'>" 
-    // . ${"choiceList" . $questions_id}[$j]["name"]
-    // . $choiceArray[$questions_id-1][$j]["name"]
-    . $data4[$j]["name"]
-    . "</li>";
-  }
-    $main .= "</ul>"
-    . "</div>";
-    echo($main);
-} 
-
-// var_dump($data4);
-?>
-<!-- </div> -->
-  <script src="quizy.js"></script>                               
+<script src="quizy.js"></script>                               
 </body>
 
 </html> 

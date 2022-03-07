@@ -1,14 +1,14 @@
 "use strict";
 
-let choices = document.getElementsByClassName('choice');
-//classNameの方は返り値がHTMLCollection
-choices = Array.from( choices );
-//HTMLCollectionから配列にする [たかなわ, たかわ, こうわ]
-choices.forEach(choice => {
-    choice.classList.add("correct");
-});
-let correct = document.getElementsByClassName('correct');
-console.log(choice);
+// let choices = document.getElementsByClassName('choice');
+// //classNameの方は返り値がHTMLCollection
+// choices = Array.from( choices );
+// //HTMLCollectionから配列にする [たかなわ, たかわ, こうわ]
+// choices.forEach(choice => {
+//     choice.classList.add("correct");
+// });
+// let correct = document.getElementsByClassName('correct');
+// console.log(choice);
 
 
 
@@ -108,78 +108,78 @@ console.log(choice);
 // });
 // }
 
-for (let i = 0; i < quizSetLength; i++) {
+// for (let i = 0; i < quizSetLength; i++) {
 
-      let correctChoice =document.getElementById(`correct${i}`);
-      correctChoice.addEventListener("click", function () {
-        correctChoice.classList.add("correct");
-        //answerBoxというクラスを作ったdivタグに追加
-        let answerBox = document.createElement("div");
-        answerBox.classList.add("answerBox");
+//       let correctChoice =document.getElementById(`correct${i}`);
+//       correctChoice.addEventListener("click", function () {
+//         correctChoice.classList.add("correct");
+//         //answerBoxというクラスを作ったdivタグに追加
+//         let answerBox = document.createElement("div");
+//         answerBox.classList.add("answerBox");
     
-        let question = document.getElementsByClassName("question")[i]; // [i]をつけないと、すべての解答ボックスが高輪の所に表示されてしまう
-        question.appendChild(answerBox);
+//         let question = document.getElementsByClassName("question")[i]; // [i]をつけないと、すべての解答ボックスが高輪の所に表示されてしまう
+//         question.appendChild(answerBox);
     
-        let answerText = document.createElement("p");
-        answerText.innerText = "正解！";
-        answerText.classList.add("answerText");
-        answerBox.appendChild(answerText);
+//         let answerText = document.createElement("p");
+//         answerText.innerText = "正解！";
+//         answerText.classList.add("answerText");
+//         answerBox.appendChild(answerText);
     
-        let correctText = document.createElement("p");
-        correctText.innerText = `正解は「 ${quizSet[i][0]} 」です！`;
-        answerBox.appendChild(correctText);
-        correctChoice.style.pointerEvents = "none";
-        incorrectChoice1.style.pointerEvents = "none";
-        incorrectChoice2.style.pointerEvents = "none";
-        // 複数回、回答できないようにする
-        // answerBox.innerText="正解" divタグの中に直接書かれてしまうから問題
-      });
+//         let correctText = document.createElement("p");
+//         correctText.innerText = `正解は「 ${quizSet[i][0]} 」です！`;
+//         answerBox.appendChild(correctText);
+//         correctChoice.style.pointerEvents = "none";
+//         incorrectChoice1.style.pointerEvents = "none";
+//         incorrectChoice2.style.pointerEvents = "none";
+//         // 複数回、回答できないようにする
+//         // answerBox.innerText="正解" divタグの中に直接書かれてしまうから問題
+//       });
 
-  // 不正解を選んだ場合
-  let incorrectChoice1 = document.getElementById(`incorrectChoice${i}_1`);
-  let incorrectChoice2 = document.getElementById(`incorrectChoice${i}_2`);
-  incorrectChoice1.addEventListener("click", function () {
-    incorrectChoice1.classList.add("incorrect");
-    correctChoice.classList.add("correct");
-    let answerBox = document.createElement("div");
-    answerBox.classList.add("answerBox");
+//   // 不正解を選んだ場合
+//   let incorrectChoice1 = document.getElementById(`incorrectChoice${i}_1`);
+//   let incorrectChoice2 = document.getElementById(`incorrectChoice${i}_2`);
+//   incorrectChoice1.addEventListener("click", function () {
+//     incorrectChoice1.classList.add("incorrect");
+//     correctChoice.classList.add("correct");
+//     let answerBox = document.createElement("div");
+//     answerBox.classList.add("answerBox");
 
-      let question = document.getElementsByClassName("question")[i];
-      question.appendChild(answerBox);
+//       let question = document.getElementsByClassName("question")[i];
+//       question.appendChild(answerBox);
 
-      let incorrectAnswerText = document.createElement("p");
-      incorrectAnswerText.innerText = "不正解！";
-      incorrectAnswerText.classList.add("incorrectAnswerText");
-      answerBox.appendChild(incorrectAnswerText);
+//       let incorrectAnswerText = document.createElement("p");
+//       incorrectAnswerText.innerText = "不正解！";
+//       incorrectAnswerText.classList.add("incorrectAnswerText");
+//       answerBox.appendChild(incorrectAnswerText);
 
-      let correctText = document.createElement("p");
-      correctText.innerText = `正解は「 ${quizSet[i][0]} 」です！`;
-      answerBox.appendChild(correctText);
-      incorrectChoice1.style.pointerEvents = "none";
-      incorrectChoice2.style.pointerEvents = "none";
-      correctChoice.style.pointerEvents = "none";
+//       let correctText = document.createElement("p");
+//       correctText.innerText = `正解は「 ${quizSet[i][0]} 」です！`;
+//       answerBox.appendChild(correctText);
+//       incorrectChoice1.style.pointerEvents = "none";
+//       incorrectChoice2.style.pointerEvents = "none";
+//       correctChoice.style.pointerEvents = "none";
     
-  });
-  incorrectChoice2.addEventListener("click", function () {
-    incorrectChoice2.classList.add("incorrect");
-    correctChoice.classList.add("correct");
-    let answerBox = document.createElement("div");
-    answerBox.classList.add("answerBox");
+//   });
+//   incorrectChoice2.addEventListener("click", function () {
+//     incorrectChoice2.classList.add("incorrect");
+//     correctChoice.classList.add("correct");
+//     let answerBox = document.createElement("div");
+//     answerBox.classList.add("answerBox");
 
-      let question = document.getElementsByClassName("question")[i];
-      question.appendChild(answerBox);
+//       let question = document.getElementsByClassName("question")[i];
+//       question.appendChild(answerBox);
 
-      let incorrectAnswerText = document.createElement("p");
-      incorrectAnswerText.innerText = "不正解！";
-      incorrectAnswerText.classList.add("incorrectAnswerText");
-      answerBox.appendChild(incorrectAnswerText);
+//       let incorrectAnswerText = document.createElement("p");
+//       incorrectAnswerText.innerText = "不正解！";
+//       incorrectAnswerText.classList.add("incorrectAnswerText");
+//       answerBox.appendChild(incorrectAnswerText);
 
-      let correctText = document.createElement("p");
-      correctText.innerText = `正解は「 ${quizSet[i][0]} 」です！`;
-      answerBox.appendChild(correctText);
-      incorrectChoice1.style.pointerEvents = "none";
-      incorrectChoice2.style.pointerEvents = "none";
-      correctChoice.style.pointerEvents = "none";
+//       let correctText = document.createElement("p");
+//       correctText.innerText = `正解は「 ${quizSet[i][0]} 」です！`;
+//       answerBox.appendChild(correctText);
+//       incorrectChoice1.style.pointerEvents = "none";
+//       incorrectChoice2.style.pointerEvents = "none";
+//       correctChoice.style.pointerEvents = "none";
     
-  });
-}
+//   });
+// }
