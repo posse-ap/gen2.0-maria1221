@@ -2,11 +2,8 @@
 include("./db_connect.php");
 // 現在日時を取得
 $this_year = date("Y");
-// echo $this_year; //2022
 $this_month = date("m"); //3
 $today = date("Y-m-d");
-// echo $today; //2022-03-26
-
 // 今日の勉強時間
 $stmt = $pdo->prepare("SELECT SUM(study_hour) FROM study_times WHERE study_date = :today");
 $stmt->bindValue(":today", $today);
@@ -21,35 +18,55 @@ $month_study_times = $stmt->fetchAll();
 // トータルの勉強時間
 $stmt = $pdo->query("SELECT SUM(study_hour) FROM study_times");
 $total_hour = $stmt->fetchAll();
-
-
 // 日付ごとの勉強時間
 $stmt = $pdo->prepare("SELECT DAY(study_date), study_hour FROM study_times WHERE MONTH(`study_date`) = :this_month AND YEAR(`study_date`) = :this_year");
 $stmt->bindValue(":this_month", $this_month);
 $stmt->bindValue(":this_year", $this_year);
 $stmt->execute();
 $date = $stmt->fetchAll();
-print_r($date);
-echo gettype($date);
+//PHPからJSに配列を渡す
 $date_array = json_encode($date);
 
 
+// 円グラフ
+$stmt = $pdo->query("SELECT * FROM study_times LEFT OUTER JOIN study_languages ON study_times.language_id = study_languages.id");
+// +----+------------+------------+-------------+-------------+------+--------------------------------+
+// | id | study_date | study_hour | language_id | contents_id | id   | study_language                 |
+// +----+------------+------------+-------------+-------------+------+--------------------------------+
+// |  1 | 2022-02-02 |          3 |           1 |           1 |    1 | JavaScript                     |
+// |  2 | 2022-02-28 |          2 |           4 |           2 |    4 | HTML                           |
+// |  3 | 2022-03-03 |          2 |           5 |           2 |    5 | Laravel                        |
+// |  4 | 2022-03-05 |          8 |           8 |           3 |    8 | 情報システム基礎知識           |
+// |  5 | 2022-03-20 |          2 |           4 |           2 |    4 | HTML                           |
+// |  6 | 2022-03-26 |          2 |           4 |           2 |    4 | HTML                           |
+// +----+------------+------------+-------------+-------------+------+--------------------------------+
+$languages = $stmt->fetchAll();
+// echo $languages[0]["study_language"]; //JavaScript
+// echo $languages[0]["study_hour"]; //3
+// echo($month_study_times[0]["SUM(study_hour)"]); //14
+// 言語ごとの学習時間
+$stmt = $pdo->prepare("SELECT study_language, SUM(study_hour) FROM study_times LEFT OUTER JOIN study_languages ON study_times.language_id = study_languages.id WHERE MONTH(`study_date`) = :this_month AND YEAR(`study_date`) = :this_year GROUP BY study_language");
+$stmt->bindValue(":this_month", $this_month);
+$stmt->bindValue(":this_year", $this_year);
+$stmt->execute();
+$study_language = $stmt->fetchAll();
+print_r($study_language);
 //PHPからJSに配列を渡す
-// $time_array = json_encode($study_array);
+$language_array = json_encode($study_language);
 ?>
 
 <!-- ここから棒グラフのjs -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
 // PHPから配列を受け取る
-let data_array = <?php echo $date_array;?>;
+let bar_data_array = <?php echo $date_array;?>;
 // google chart で使うために文字列から数値に変換
 let bar_graph_data = new Array();
 // let bar_graph_array = new Array();
-for(let i = 0; i < data_array.length; i++){
+for(let i = 0; i < bar_data_array.length; i++){
   // let day_array = data_array[i]["DAY(study_date)"].map(Number);
-  let day = Number(data_array[i]["DAY(study_date)"]);
-  let hour = Number(data_array[i]["study_hour"]);
+  let day = Number(bar_data_array[i]["DAY(study_date)"]);
+  let hour = Number(bar_data_array[i]["study_hour"]);
 
   bar_graph_data.push(day);
   bar_graph_data.push(hour);
@@ -70,39 +87,6 @@ function drawChart() {
 
       data.addColumn('number', 'Day of Month');
       data.addColumn('number', 'Study Hour');
-
-      // data.addRows([
-      //   [1, 3], 
-      //   [2, 4],
-      //   [3, 5],
-      //   [4, 3],
-      //   [5, 0],
-      //   [6, 0],
-      //   [7, 4],
-      //   [8, 2],
-      //   [9, 2],
-      //   [10, 8],
-      //   [11, 8],
-      //   [12, 2],
-      //   [13, 2],
-      //   [14, 1],
-      //   [15, 7],
-      //   [16, 4],
-      //   [17, 4],
-      //   [18, 3],
-      //   [19, 3],
-      //   [20, 3],
-      //   [21, 2],
-      //   [22, 2],
-      //   [23, 6],
-      //   [24, 2],
-      //   [25, 2],
-      //   [26, 1],
-      //   [27, 1],
-      //   [28, 1],
-      //   [29, 7],
-      //   [30, 8]
-      // ]);
       data.addRows(bar_graph_array);
       var options = {
         legend:
@@ -138,41 +122,57 @@ function drawChart() {
   ここから円グラフ
 *****************/
 // 左
-// google.charts.load("current", {packages:["corechart"]});
-// google.charts.setOnLoadCallback(drawChartLanguage);
-// function drawChartLanguage() {
-//   var data = google.visualization.arrayToDataTable([
-//     ['Task', 'Hours per Day'],
-//     ['JavaScript', 42],
-//     ['CSS', 18],
-//     ['PHP',  2],
-//     ['Laravel', 10],
-//     ['SQL',    7],
-//     ['SHELL',    7],
-//     ['乗法システム基礎知識',    14],
-//   ]);
+// PHPから配列を受け取る
+let language_data = <?php echo $language_array;?>;
+// google chart で使うために文字列から数値に変換
+let language_graph_data = new Array();
+language_graph_data.push('Task', 'Hours per Day');
+for(let i = 0; i < language_data.length; i++){
+  let language = language_data[i]["study_language"];
+  let hour = Number(language_data[i]["SUM(study_hour)"]);
+  language_graph_data.push(language);
+  language_graph_data.push(hour);
+};
+// 配列を2つに分割
+let language_graph_array = chunk(language_graph_data, 2);
 
-//   var options = {
-//     chartArea:{width:'90%',height:'100%'},
-//     pieHole: 0.5,
-//     legend:
-//         { position: 'none'},
-//     slices: {
-//       0: {color: '#0345EC'},
-//       1: {color: '#0F71BD'},
-//       2: {color: '#20BDDE'},
-//       3: {color: '#3CCEFE'},
-//       4: {color: '#B29EF3'},
-//       5: {color: '#6D46EC'},
-//       6: {color: '#4A17EF'},
-//       7: {color: '#3105C0'}
-//     },
-//     pieSliceBorderColor:  'none'
-//   };
+console.log(language_graph_array);
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChartLanguage);
+function drawChartLanguage() {
+  // var data = google.visualization.arrayToDataTable([
+  //   ['Task', 'Hours per Day'],
+  //   ['JavaScript', 42],
+  //   ['CSS', 18],
+  //   ['PHP',  2],
+  //   ['Laravel', 10],
+  //   ['SQL',    7],
+  //   ['SHELL',    7],
+  //   ['乗法システム基礎知識',    14],
+  // ]);
+  var data = google.visualization.arrayToDataTable(language_graph_array);
 
-//   var chart = new google.visualization.PieChart(document.getElementById('donutchart_language'));
-//   chart.draw(data, options);
-// }
+  var options = {
+    chartArea:{width:'90%',height:'100%'},
+    pieHole: 0.5,
+    legend:
+        { position: 'none'},
+    slices: {
+      0: {color: '#0345EC'},
+      1: {color: '#0F71BD'},
+      2: {color: '#20BDDE'},
+      3: {color: '#3CCEFE'},
+      4: {color: '#B29EF3'},
+      5: {color: '#6D46EC'},
+      6: {color: '#4A17EF'},
+      7: {color: '#3105C0'}
+    },
+    pieSliceBorderColor:  'none'
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('donutchart_language'));
+  chart.draw(data, options);
+}
 // // 右
 // google.charts.load("current", {packages:["corechart"]});
 // google.charts.setOnLoadCallback(drawChartContent);
