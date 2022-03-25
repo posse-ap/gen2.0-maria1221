@@ -29,6 +29,8 @@ $date_array = json_encode($date);
 
 
 // 円グラフ
+
+// 学習言語
 $stmt = $pdo->query("SELECT * FROM study_times LEFT OUTER JOIN study_languages ON study_times.language_id = study_languages.id");
 // +----+------------+------------+-------------+-------------+------+--------------------------------+
 // | id | study_date | study_hour | language_id | contents_id | id   | study_language                 |
@@ -53,6 +55,29 @@ $study_language = $stmt->fetchAll();
 print_r($study_language);
 //PHPからJSに配列を渡す
 $language_array = json_encode($study_language);
+
+// 学習コンテンツ
+$stmt = $pdo->query("SELECT * FROM study_times LEFT OUTER JOIN study_contents ON study_times.contents_id = study_contents.id");
+// +----+------------+------------+-------------+-------------+------+-----------------------------+
+// | id | study_date | study_hour | language_id | contents_id | id   | contents_name               |
+// +----+------------+------------+-------------+-------------+------+-----------------------------+
+// |  1 | 2022-02-02 |          3 |           1 |           1 |    1 | ドットインストール          |
+// |  2 | 2022-02-28 |          2 |           4 |           2 |    2 | N予備校                     |
+// |  3 | 2022-03-03 |          2 |           5 |           2 |    2 | N予備校                     |
+// |  4 | 2022-03-05 |          8 |           8 |           3 |    3 | POSSE課題                   |
+// |  5 | 2022-03-20 |          2 |           4 |           2 |    2 | N予備校                     |
+// |  6 | 2022-03-26 |          2 |           4 |           2 |    2 | N予備校                     |
+// +----+------------+------------+-------------+-------------+------+-----------------------------+
+$contents = $stmt->fetchAll();
+// コンテンツごとの学習時間
+$stmt = $pdo->prepare("SELECT contents_name, SUM(study_hour) FROM study_times LEFT OUTER JOIN study_contents ON study_times.contents_id = study_contents.id WHERE MONTH(`study_date`) = :this_month AND YEAR(`study_date`) = :this_year GROUP BY contents_name");
+$stmt->bindValue(":this_month", $this_month);
+$stmt->bindValue(":this_year", $this_year);
+$stmt->execute();
+$study_contents = $stmt->fetchAll();
+print_r($study_language);
+//PHPからJSに配列を渡す
+$contents_array = json_encode($study_contents);
 ?>
 
 <!-- ここから棒グラフのjs -->
@@ -129,27 +154,16 @@ let language_graph_data = new Array();
 language_graph_data.push('Task', 'Hours per Day');
 for(let i = 0; i < language_data.length; i++){
   let language = language_data[i]["study_language"];
-  let hour = Number(language_data[i]["SUM(study_hour)"]);
+  let language_hour = Number(language_data[i]["SUM(study_hour)"]);
   language_graph_data.push(language);
-  language_graph_data.push(hour);
+  language_graph_data.push(language_hour);
 };
 // 配列を2つに分割
 let language_graph_array = chunk(language_graph_data, 2);
-
 console.log(language_graph_array);
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(drawChartLanguage);
 function drawChartLanguage() {
-  // var data = google.visualization.arrayToDataTable([
-  //   ['Task', 'Hours per Day'],
-  //   ['JavaScript', 42],
-  //   ['CSS', 18],
-  //   ['PHP',  2],
-  //   ['Laravel', 10],
-  //   ['SQL',    7],
-  //   ['SHELL',    7],
-  //   ['乗法システム基礎知識',    14],
-  // ]);
   var data = google.visualization.arrayToDataTable(language_graph_array);
 
   var options = {
@@ -174,37 +188,45 @@ function drawChartLanguage() {
   chart.draw(data, options);
 }
 // // 右
-// google.charts.load("current", {packages:["corechart"]});
-// google.charts.setOnLoadCallback(drawChartContent);
-// function drawChartContent() {
-//   var data = google.visualization.arrayToDataTable([
-//     ['Task', 'Hours per Day'],
-//     ['ドットインストール',     42],
-//     ['N予備校',      33],
-//     ['POSSE課題',  25],
-//   ]);
+// PHPから配列を受け取る
+let contents_data = <?php echo $contents_array;?>;
+// google chart で使うために文字列から数値に変換
+let contents_graph_data = new Array();
+contents_graph_data.push('Task', 'Hours per Day');
+for(let i = 0; i < contents_data.length; i++){
+  let contents = contents_data[i]["contents_name"];
+  let hour = Number(contents_data[i]["SUM(study_hour)"]);
+  contents_graph_data.push(contents);
+  contents_graph_data.push(hour);
+};
+// 配列を2つに分割
+let contents_graph_array = chunk(contents_graph_data, 2);
+console.log(contents_graph_array);
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChartContent);
+function drawChartContent() {
+  var data = google.visualization.arrayToDataTable(contents_graph_array);
+  var options = {
+    pieHole: 0.5,
+    legend:
+        { position: 'none'},
+    chartArea:{width:'90%',height: '100%'},
+    slices: {
+      0: {color: '#0345EC'},
+      1: {color: '#0F71BD'},
+      2: {color: '#20BDDE'},
+    },
+    pieSliceBorderColor: 'none'
+  };
 
-//   var options = {
-//     pieHole: 0.5,
-//     legend:
-//         { position: 'none'},
-//     chartArea:{width:'90%',height: '100%'},
-//     slices: {
-//       0: {color: '#0345EC'},
-//       1: {color: '#0F71BD'},
-//       2: {color: '#20BDDE'},
-//     },
-//     pieSliceBorderColor: 'none'
-//   };
-
-//   var chart = new google.visualization.PieChart(document.getElementById('donutchart_content'));
-//   chart.draw(data, options);
-// }
+  var chart = new google.visualization.PieChart(document.getElementById('donutchart_content'));
+  chart.draw(data, options);
+}
 
 // onReSizeイベント  画面のサイズの変更に対応 
 window.onresize = function(){
-  // drawChartLanguage();
-  // drawChartContent();
-  // drawChart();
+  drawChartLanguage();
+  drawChartContent();
+  drawChart();
 }
 </script>
