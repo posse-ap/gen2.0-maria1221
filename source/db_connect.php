@@ -4,10 +4,10 @@ try {
 $pdo = new PDO(  // pdoインスタンスを作成
     'mysql:host=mysql;dbname=webapp_db;',
     'maria',
-    'password',
-    [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::ERRMODE_EXCEPTION]
-);
+    'password'
+  );
 } catch (PDOException $e) {
     echo $e->getMessage();
     exit;     
 };
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

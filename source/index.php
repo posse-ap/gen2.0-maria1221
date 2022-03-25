@@ -1,29 +1,7 @@
 <?php
 include("./db_connect.php");
-$stmt = $pdo->query("SELECT * FROM study_times");
-$study_time = $stmt->fetchAll();
-// 現在日時を取得
-$this_year = date("Y");
-$this_month = date("m");
-$date = date("d");
-
-// 今日の勉強時間
-$stmt = $pdo->query("SELECT SUM(study_hour) FROM study_times
-WHERE MONTH(study_date) = $this_month
-AND YEAR(study_date) = YEAR(CURRENT_DATE())");
-$today_studytime = $stmt->fetchAll();
-// 今月の勉強時間
-$stmt = $pdo->query("SELECT SUM(study_hour) FROM study_times
-WHERE DAY(study_date) =$date
-AND MONTH(study_date) = $this_month
-AND YEAR(study_date) = YEAR(CURRENT_DATE())");
-$this_month_studytime = $stmt->fetchAll();
-// トータルの勉強時間
-$stmt = $pdo->query("SELECT SUM(study_hour) FROM study_times");
-$total_studytime = $stmt->fetchAll();
+include("./chart.php");
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -35,19 +13,17 @@ $total_studytime = $stmt->fetchAll();
   <title>Document</title>
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="webapp.css">
-  <!-- 棒グラフ -->
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
   <div class="container">
-    <header class="header">
+    <!-- <header class="header">
       <div class="header_elements">
         <img class="header_img" src="./img/POSSElogo.jpg" alt="POSSEロゴ">
         <p>4th week</p>
       </div>
       <button id="headerButton" class="header_button">記録・投稿</button>
-    </header>
+    </header> -->
     <!-- トップページ -->
     <div class="top_contents">
       <!-- 左側 -->
@@ -55,17 +31,17 @@ $total_studytime = $stmt->fetchAll();
         <div class="learning_time">
           <div class="learning_time_box">
             <p class="learning_time_title">Today</p>
-            <p class="time"><?php print_r($this_month_studytime[0]["SUM(study_hour)"]) ?></p>
+            <p class="time"><?php echo $today_study_times[0]["SUM(study_hour)"];?></p>
             <p class="unit">hour</p>
           </div>
           <div class="learning_time_box">
             <p class="learning_time_title">Month</p>
-            <p class="time"><?php print_r($today_studytime[0]["SUM(study_hour)"]);?></p>
+            <p class="time"><?php echo $month_study_times[0]["SUM(study_hour)"];?></p>
             <p class="unit">hour</p>
           </div>
           <div class="learning_time_box">
             <p class="learning_time_title">Total</p>
-            <p class="time"><?php print_r($total_studytime[0]["SUM(study_hour)"]) ?></p>
+            <p class="time"><?php echo $total_hour[0]["SUM(study_hour)"];?></p>
             <p class="unit">hour</p>
           </div>
         </div>

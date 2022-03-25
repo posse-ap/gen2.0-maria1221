@@ -9,14 +9,12 @@ CREATE TABLE study_times (
     index id_index (id)
 );
 INSERT INTO study_times(study_date, study_hour, language_id, contents_id) VALUES 
-('2021-07-01', 9, 1, 2),
-('2021-07-02', 9, 3, 1),
-('2021-07-19', 7, 5, 2),
-('2021-08-05', 8, 3, 3),
-('2022-02-02', 3, 1, 1),
-('2022-02-03', 2, 4, 2),
-('2022-02-05', 8, 8, 3),
-('2022-03-20', 2, 4, 2);
+('2022-2-2', 3, 1, 1),
+('2022-2-28', 2, 4, 2),
+('2022-3-3', 2, 5, 2),
+('2022-3-5', 8, 8, 3),
+('2022-3-20', 2, 4, 2),
+('2022-3-26', 2, 4, 2);
 
 CREATE TABLE study_languages (
     id INT NOT NULL PRIMARY KEY  auto_increment,

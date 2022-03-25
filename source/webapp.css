@@ -73,11 +73,6 @@ html {
   /* 行の数と幅 */
   grid-template-rows: repeat(4, 1fr);
   column-gap: 20px;  /* 右側と左側の隙間 */
-  /* 要素を横並びにする
-  均等に配置 */
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* gap: 20px; */
   width: 100%;
   height: 100%;
   /* ヘッダーの下に入り込まないようにする */
@@ -141,9 +136,6 @@ https://coliss.com/articles/build-websites/operation/css/css-grid-cheat-sheets.h
   justify-content: center;
   /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
   box-shadow: 0px 1px 3px #a5a5a5;
-  /* 要素の幅を均等にする */
-  /* width: 33.3333%;*/
-   /* height: 100%; */
 }
 
 .learning_time_title {
@@ -162,6 +154,7 @@ https://coliss.com/articles/build-websites/operation/css/css-grid-cheat-sheets.h
 }
 /* 棒グラフ */
 .bar_graph {
+  height: 60%;
   /* 列 */
   grid-column-start: 1;
   grid-column-end: 4;
@@ -209,6 +202,7 @@ https://coliss.com/articles/build-websites/operation/css/css-grid-cheat-sheets.h
   padding: 20px;
   grid-row-start: 1;
   grid-row-end: 3;
+  height: 68%;
 }
 .graph_title {
 /* 太字 */
@@ -313,12 +307,10 @@ https://coliss.com/articles/build-websites/operation/css/css-grid-cheat-sheets.h
   margin-left: auto; 
 }
 .left_modal {
-
+  height: 100%;
 }
 .right_modal {
-}
-.study_time_form {
-
+  height: 100%;
 }
 .modal_button {
   /* display: block; */
@@ -458,9 +450,6 @@ input[type="date"]::-webkit-calendar-picker-indicator{
   font-size: 14px;
   font-weight: bold;
 } 
-/* .study_content_form p {
-  margin-top: 30px;
-} */
 .study_content_form label {
   background-color: #F5F5F8;
   border-radius: 10px;
@@ -632,6 +621,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{
 }
 .left_side {
   display: block;
+  height: 50%;
 }
 .learning_time {
   column-gap: 1.6rem;
@@ -643,6 +633,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{
 }
 .graph_box {
   padding: 1rem;
+  height: 100%;
 }
 
 #donutchart_language{
