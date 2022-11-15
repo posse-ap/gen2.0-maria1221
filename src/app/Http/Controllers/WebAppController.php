@@ -18,11 +18,14 @@ class WebAppController extends Controller
         $today = date('Y-m-d');
         $this_year = date('Y');
         $this_month = date('m');
-        $study_times = StudyTime::all();
+        $study_times = StudyTime::selectRaw('SUM(study_hour) as total_study_hour')->get();
         $study_languages = StudyLanguage::all();
         $study_contents = StudyContent::all();
-        $today_study_times = StudyTime::where('timestamps', $today)->get();
-        $month_study_times = StudyTime::whereYear('timestamps', $today)->get();
-        return view ('webapp.index', compact('study_times', 'study_languages', 'study_contents', 'today_study_times'));
+        $today_study_times = StudyTime::where('study_date', $today)->get();
+        $month_study_times = StudyTime::selectRaw('SUM(study_hour) as month_study_hour')
+        ->whereYear('study_date', $this_year)
+        ->whereMonth('study_date', $this_month)
+        ->get();
+        return view ('webapp.index', compact('today', 'study_times', 'study_languages', 'study_contents', 'today_study_times', 'month_study_times'));
     }
 }

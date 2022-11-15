@@ -13,7 +13,7 @@ class CreateStudyLanguagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('study_language', function (Blueprint $table) {
+        Schema::create('study_languages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('study_language');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateStudyLanguagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('study_language');
+        Schema::dropIfExists('study_languages');
     }
 }

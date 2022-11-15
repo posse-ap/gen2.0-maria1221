@@ -4,20 +4,25 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="reset.css">
-  <link rel="stylesheet" href="webapp.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/reset.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/css/webapp.css')}}">
   <title>webapp</title>
 </head>
 <body>
 
-<div class="container">
-    <!-- <header class="header">
+
+  {{-- <p>{{$today}}</p> --}}
+  {{-- @foreach($study_times as $time)
+  <p>{{$time->study_hour}}a</p>
+  @endforeach --}}
+  <div class="container">
+    <header class="header">
       <div class="header_elements">
         <img class="header_img" src="./img/POSSElogo.jpg" alt="POSSEロゴ">
         <p>4th week</p>
       </div>
       <button id="headerButton" class="header_button">記録・投稿</button>
-    </header> -->
+    </header> 
     <!-- トップページ -->
     <div class="top_contents">
       <!-- 左側 -->
@@ -25,17 +30,23 @@
         <div class="learning_time">
           <div class="learning_time_box">
             <p class="learning_time_title">Today</p>
-            <p class="time"><?php echo $today_study_times[0]["SUM(study_hour)"];?></p>
+            @foreach($today_study_times as $study_time)
+            <p class="time">{{ $study_time->study_hour }}</p>
+            @endforeach
             <p class="unit">hour</p>
           </div>
           <div class="learning_time_box">
             <p class="learning_time_title">Month</p>
-            <p class="time"><?php echo $month_study_times[0]["SUM(study_hour)"];?></p>
+            @foreach($month_study_times as $month_study_time)
+            <p class="time">{{ $month_study_time->month_study_hour}}</p>
+            @endforeach
             <p class="unit">hour</p>
           </div>
           <div class="learning_time_box">
             <p class="learning_time_title">Total</p>
-            <p class="time"><?php echo $total_hour[0]["SUM(study_hour)"];?></p>
+            @foreach($study_times as $study_time)
+            <p class="time">{{$study_time->total_study_hour }}</p>
+            @endforeach
             <p class="unit">hour</p>
           </div>
         </div>
@@ -100,7 +111,7 @@
                 <input id="css" type="checkbox" name="studyLanguage" value="CSS"><label for="css">CSS</label>
                 <input id="javaScript" type="checkbox" name="studyLanguage" value="JavaScript"><label
                   for="javaScript">JavaScript</label>
-                <input id="php" type="checkbox" name="studyLanguage" value="PHP"><label for="php">PHP</label>
+                <input id="php" type="checkbox" name="studyLanguage" value="PHP"><label for="php//">PHP</label>
                 <input id="laravel" type="checkbox" name="studyLanguage" value="Laravel"><label
                   for="laravel">Laravel</label>
                 <input id="sql" type="checkbox" name="studyLanguage" value="SQL"><label for="sql">SQL</label>
