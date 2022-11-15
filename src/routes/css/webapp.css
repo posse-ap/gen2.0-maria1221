@@ -1,0 +1,674 @@
+/* 1rem = 16px 
+https://blog.8bit.co.jp/?p=18279
+*/
+html {
+  font-size: 62.5%;
+  /* 16px×0.625＝10px */
+  /* font-size: 1.4rem; font-size : 14px と同等 */
+}
+
+/* ヘッダーからフッターまで全て囲う */
+.container {
+  position: relative;
+  background-color: #F5F5F8;
+  min-height: 100vh;  /* フッターが常にページの最下部に位置する */
+    /* vh ブラウザで表示されている範囲に依存
+      ％ 親要素に依存。
+      要素をページの高さ一杯に配置する場合100vh
+      ページの横幅いっぱいに配置する場合は100% 
+      https://qiita.com/iverson3kobe0824/items/b31c4e3eb506874e51f6 */
+}
+/* ヘッダー */
+.header {
+  /* 要素を横並びにする */
+  display: flex;
+  /* 各要素を均等に配置し、最初の要素を先頭に、最後の要素を末尾に寄せる */
+  justify-content: space-between;
+  width: 100%;
+  height: 64px;
+  background-color: white;
+  /*ヘッダーを一番上に固定 */
+  top: 0;
+  position: fixed;
+  z-index: 50;  /* ヘッダーが他の要素よりも上に来るようにする */
+  padding: 0.8rem 3rem;
+}
+.header_elements {
+  /* 写真と文字を横並びにする
+  上下中央にする 
+  写真と文字の隙間をあける*/
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  /* はみ出た要素(ここではPOSSElogo)が見えないようにする */
+  overflow: hidden;
+}
+.header_img {
+  height: 200%;
+}
+.header_elements p {
+  color: #97b9d1;
+  font-size: 0.5rem;
+}
+.header_button {
+  /* 背景をグラデーションにする */
+  background:linear-gradient(to right, #0f71bc, #3ccfff);
+  /* 文字は白 */
+  color: white;
+  /* 角を丸くする */
+  border-radius: 30px;
+  /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
+  box-shadow: -1px 3px 10px #6bc3e0;
+  /* 文字がボタンの中央 */
+  padding-right: 4rem;
+  padding-left: 4rem;
+  font-size: 0.8rem;
+}
+
+/* 左右に分ける */
+.top_contents {
+  display: grid;
+  /* 列の数と幅 */
+  grid-template-columns: repeat(4, 1fr);
+  /* 行の数と幅 */
+  grid-template-rows: repeat(4, 1fr);
+  column-gap: 20px;  /* 右側と左側の隙間 */
+  width: 100%;
+  height: 100%;
+  /* ヘッダーの下に入り込まないようにする */
+  padding-top: 64px; 
+  /* フッターの下に入り込まないようにする */
+  padding-bottom: 40px; 
+  /* 左右の隙間 */
+  padding-right: 2rem;
+  padding-left: 2rem;
+  position: absolute;
+  bottom: 0;
+}
+
+/* 左側 */
+.left_side {
+  margin-top: 2rem;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 5;
+  display: grid;
+  /* 列の数と幅 */
+  grid-template-columns: repeat(3, 1fr);
+  /* 行の数と幅 */
+  grid-template-rows: repeat(5, 1fr);
+  /* 学習時間と棒グラフの間の隙間 */
+  row-gap: 2rem;   /* 20px */
+}
+
+/* https://coliss.com/articles/build-websites/operation/css/learn-css-grid-in-5-minutes.html
+https://coliss.com/articles/build-websites/operation/css/css-grid-cheat-sheets.html
+
+*/
+/* 学習時間 */
+.learning_time {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  display: grid;
+  /* 列の数と幅 */
+  grid-template-columns: repeat(3, 1fr);
+  /* 行の数と幅 */
+  grid-template-rows: repeat(1, 1fr);
+  /* それぞれの箱の間の隙間 */
+  column-gap: 2rem;
+}
+.learning_time_box {
+  grid-row-start: 1;
+  grid-row-end: 1;
+  /* 角を丸く
+  影  */
+  background-color: white;
+  text-align: center;
+  /* 角を丸くする */
+  border-radius: 10px;
+  /* 要素を上下中央 */
+  display: flex;
+  flex-flow: column; /* 要素を縦並びにする */
+  align-items: center;
+  justify-content: center;
+  /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
+  box-shadow: 0px 1px 3px #a5a5a5;
+}
+
+.learning_time_title {
+  color: #0f71bc;
+  font-size: 1rem;
+}
+.time {
+  /* 太字
+  少し文字大きめ */
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.unit {
+  color: #97b9d1;
+  font-size: 1rem;
+}
+/* 棒グラフ */
+.bar_graph {
+  height: 60%;
+  /* 列 */
+  grid-column-start: 1;
+  grid-column-end: 4;
+  /* 行 */
+  grid-row-start: 2;
+  grid-row-end: 6;
+  background-color: white;
+  padding: 10px;
+  /* 角を丸く */
+  border-radius: 10px;  
+  /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
+  box-shadow: 0px 1px 3px #a5a5a5;
+  /* position: absolute; */
+  /* bottom: 0; */
+  /* margin-top: 20px; */
+}
+.chart_div {
+  height: 100%;
+  width: 100%;
+}
+
+/* 右側 */
+.right_side {
+  margin-top: 2rem;
+  grid-column-start: 3;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 5;
+  column-gap: 20px;
+  display: grid;
+  /* 列の数と幅 */
+  grid-template-columns: repeat(2, 1fr);
+  /* 行の数と幅 */
+  grid-template-rows: repeat(2, 1fr);
+}
+.graph_box {
+  /* 背景色が白 */
+  background-color: white;
+  /* 2つとも同じ横幅にする */
+  /* width: 100%; */
+  /* 角を丸くする */
+  border-radius: 10px;
+  /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
+  box-shadow: 0px 1px 3px #a5a5a5;
+  padding: 20px;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  height: 68%;
+}
+.graph_title {
+/* 太字 */
+  font-weight: bold;
+}
+/* .all_legends {
+  margin-top: 1rem;
+} */
+.legends_list {
+  /* 文字小さい
+  改行しない */
+  font-size: 0.8rem;
+  display: inline-block;
+  /* 凡例同士の隙間 */
+  padding: 0.5rem;
+
+}
+/* 凡例 */
+.legends_list::before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  position: relative;
+  top: 2px;
+  left: -5px;
+}
+/* 凡例の色 */
+.first_legends::before{
+  background-color: #0345EC;
+}
+.second_legends::before {
+  background-color: #0F71BD;
+}
+.third_legends::before {
+  background-color: #20BDDE;
+}
+.fourth_legends::before {
+  background-color: #3CCEFE;
+}
+.fifth_legends::before {
+  background-color: #B29EF3;
+}
+.sixth_legends::before {
+  background-color: #6D46EC;
+}
+.seventh_legends::before {
+  background-color: #4A17EF;
+}
+.eighth_legends::before {
+  background-color: #3105C0;
+}
+
+
+/**********
+モーダル
+**********/
+.modal_page {
+  display: none;
+  background-color: white;
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 90vh;
+  border-radius: 20px;
+  padding: 20px 56px;
+}
+.cover {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(3,3,3,.5);
+}
+.modal_contents {
+  display: grid;
+  /* 列の数と幅 */
+  grid-template-columns: repeat(2, 1fr);
+  /* 行の数と幅 */
+  grid-template-rows: 30px 2fr 60px;
+  column-gap: 40px;
+  height: 100%;
+}
+.close_button {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #F5F4F9;
+  text-align:center;
+  line-height: 25px;
+  margin-right: 30px;
+  margin-left: auto; 
+}
+.left_modal {
+  height: 100%;
+}
+.right_modal {
+  height: 100%;
+}
+.modal_button {
+  /* display: block; */
+  position: absolute;
+  background:linear-gradient(to right, #1072BD, #43D0FF);
+  color: white;
+  border-radius: 30px;
+  padding: 10px 100px;
+  text-align: center;
+  width: 300px;
+  height: 50px;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%);
+  /* margin: 0 auto; */
+  /* 影を付ける box-shadow: 正の値で左の向きpx 正の値で下の向きpx ぼかしpx 広がりpx 色 内側指定;  */
+  box-shadow: -1px 3px 10px #6bc3e0;
+}
+
+/* チェックボックス */
+/* 元々のチェックボックスを非表示にする */
+.checkbox input[type="checkbox"] {
+  display: none;
+}
+/* チェックボックスの代わりを成すラベルを作る */
+.checkbox input[type="checkbox"]+label {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  padding-right: 10px;
+}
+/* ラベルの左に表示させるボックス ::beforeは疑似要素*/
+.checkbox input[type="checkbox"]+label::before{
+  content: "";
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  width: 15px;
+  height: 15px;
+  margin-top: -10px;
+  left: 6px;
+  top: 50%;
+  background-color: #CECECE; /* 背景の色変更 お好きな色を */
+  border-radius: 50%;
+}
+/* チェックした時の背景色 */
+.checkbox input[type=checkbox]:checked+label::before{
+  background-color: #0F71BD;
+}
+
+ /* チェック */
+.checkbox input[type=checkbox]+label::after{
+  content: "";
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  width: 8px;
+  height: 8px;
+  margin-top: -9px;
+  top: 54%;
+  left: 9px;
+  transform: rotate(-45deg);
+  border-bottom: 3px solid;
+  border-left: 3px solid;
+  border-color:  white; /* チェックの色変更 お好きな色を */
+}
+
+/* 学習日 */
+.study_day_form{
+  display: flex;
+  /* 要素を縦並びにする */
+  flex-flow: column;
+  margin-top: 15px;;
+}
+.modal_text{
+  height: 50px;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin-top: 10px;
+  width: 100%;
+}
+.study_day_form label {
+  font-size: 14px;
+  font-weight: bold;
+}
+/* カレンダー */
+.calendar_label{
+  position: relative;
+}
+.calendar_label::before {
+  background-color: #F5F5F8;
+  border-radius: 10px;
+  position: absolute;
+  content: "";
+  height: 50px;
+  width: 100%;
+  top: 22px;
+  left: 0;
+}
+input {
+  padding: 10px;
+  font-weight: normal;
+}
+input[type="date"]::-webkit-datetime-edit{
+  position: absolute;
+  cursor: pointer;
+  content: "";
+  line-height:50px;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+} 
+
+input[type="date"]::-webkit-calendar-picker-indicator{
+  position: absolute;
+  padding: 0;
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  padding: 20px 30px;
+  content: "";
+  height: 40px;
+  width: 170px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  top: 25px;
+  left: 0;
+}
+
+
+/* 学習コンテンツ */
+.study_content_form {
+  margin-top: 80px;
+}
+.study_content_form p {
+  font-size: 14px;
+  font-weight: bold;
+} 
+.study_content_form label {
+  background-color: #F5F5F8;
+  border-radius: 10px;
+  padding: 10px 10px;
+  margin-right: 30px;
+  margin-top: 10px;
+  /* 改行させない */
+  display: inline-block;
+}
+
+/* 学習言語 */
+.study_language_form {
+  margin-top: 30px;
+}
+.study_language_form p {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+.study_language_form label {
+  margin-top: 10px;
+  display: inline-block;
+  border-radius: 10px;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #F5F5F8;
+}
+
+/* 学習時間 */
+.study_time_form {
+  display: flex;
+  /* 要素を縦並びにする */
+  flex-flow: column;
+}
+.study_time_form label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+.study_time_form input {
+  margin-top: 5px;
+}
+.study_time {
+  background-color: #F5F5F8;
+}
+/* ツイッター用コメント */
+.twitter_comment {
+  display: flex;
+  /* 要素を縦並びにする */
+  flex-flow: column;
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+.twitter_comment label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.twitter_text {
+  background-color: #F5F5F8;
+  height: 220px;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin-top: 0;
+}
+
+/* 元々のチェックボックスを非表示にする */
+.twitter_share input[type="checkbox"] {
+  display: none;
+}
+/* チェックボックスの代わりを成すラベルを作る */
+.twitter_share input[type="checkbox"]+label {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  padding-right: 10px;
+}
+
+/* ラベルの左に表示させるボックス ::beforeは疑似要素*/
+.twitter_share input[type="checkbox"]+label::before{
+  content: "";
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  left: 0;
+  right: 10px;
+  top: 50%;
+  background-color: #CECECE; /* 背景の色*/
+  border-radius: 50%;
+}
+/* チェックした時の背景色 */
+.twitter_share input[type=checkbox]:checked+label::before{
+  background-color: #0F71BD;
+}
+/* チェックが入った時のレ点 */
+.twitter_share input[type=checkbox]+label::after{
+  content: "";
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  margin-top: -9px;
+  top: 60%;
+  left: 9px;
+  transform: rotate(-45deg);
+  border-bottom: 3px solid;
+  border-left: 3px solid;
+  border-color:  white; /* チェックの色 */
+}
+
+.complete_block {
+  
+}
+
+
+
+/* モーダル、投稿完了画面時の背景 */
+.cover {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: rgba(3,3,3,.5);
+}
+
+
+
+/* フッター */
+.footer {
+  z-index: 100px;
+  width: 100%;
+    /* 要素を上下中央 */
+  display: flex;
+  flex-flow: column; /* 要素を縦並びにする */
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+.footer_left_button {
+  color: #0f71bc;
+  font-weight: 900;
+}
+.footer_right_button {
+  color: #97b9d1;
+  font-weight: 900;
+}
+.footer_button {
+  display: none;
+}
+
+
+/**********
+スマホ用レスポンシブ対応 850px以下の場合 
+***********/
+@media screen and (max-width: 850px) {
+.top_contents {
+  display: block;
+}
+.left_side {
+  display: block;
+  height: 50%;
+}
+.learning_time {
+  column-gap: 1.6rem;
+  margin-bottom: 3.2rem;
+}
+.right_side {
+  margin-top: 1.6rem;
+  column-gap: 1.6rem;
+}
+.graph_box {
+  padding: 1rem;
+  height: 100%;
+}
+
+#donutchart_language{
+  height: 100px;
+}
+#donutchart_content{
+  height: 100px;
+}
+/***********
+  モーダル
+***********/
+  .modal_page {
+    padding: 20px;
+    display: none;
+  }
+.modal_contents {
+  display: block;
+}
+.study_content_form {
+  margin-top: 74px;
+}
+.study_language_form {
+  margin-top: 24px;
+}
+.study_time_form label {
+  margin-top: 24px;
+}
+.twitter_comment {
+  margin-top: 24px;
+  margin-bottom: 20px;
+}
+.twitter_share {
+  margin-bottom: 22px; 
+}
+.twitter_text {
+  height: 60px;
+}
+}
