@@ -173,7 +173,6 @@
 
 // 日付ごとの学習時間
 let bar_data_array = @json($month_study);
-
 // google chart で使うために文字列から数値に変換
 let bar_graph_data = new Array();
 // let bar_graph_array = new Array();
@@ -189,9 +188,7 @@ const chunk = (arrayData, chunkSize) =>
   Array.from({length: Math.ceil(arrayData.length / chunkSize)}, (v, i) =>
     arrayData.slice(i * chunkSize, i * chunkSize + chunkSize));
 let bar_graph_array = chunk(bar_graph_data, 2);
-console.log(bar_graph_array);
 
-// // console.log(time);
 google.charts.load("current", {packages:['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
@@ -236,85 +233,111 @@ function drawChart() {
 *****************/
 // 左
 // PHPから配列を受け取る
-// let language_data =;
-// // google chart で使うために文字列から数値に変換
-// let language_graph_data = new Array();
-// language_graph_data.push('Task', 'Hours per Day');
-// for(let i = 0; i < language_data.length; i++){
-//   let language = language_data[i]["study_language"];
-//   let language_hour = Number(language_data[i]["SUM(study_hour)"]);
-//   language_graph_data.push(language);
-//   language_graph_data.push(language_hour);
-// };
+let language_data = @json($languages);
+// google chart で使うために文字列から数値に変換
+let language_graph_data = new Array();
+language_graph_data.push('Task', 'Hours per Day');
+let data = Object.entries(language_data);
+// console.log(data[0][1]['study_times']);
+data.forEach(function(key)
+{
+  console.log(key[1]['study_language']);
+  console.log(key[1]['study_times']);
+  let time_array = key[1]['study_times'];
+  // 学習時間
+  let datum = 0;
+  time_array.forEach(function(time) {
+    console.log(time.study_hour);
+    // let time = date["study_times"];
+    // 学習時間
+    datum = datum + time.study_hour;
+    // let language_hour = language_data.reduce((sum, obj) => sum + obj.study_hour, 0)
+  })
+  language_graph_data.push(key[1]['study_language'])
+  language_graph_data.push(datum)
+
+});
+  
+
 // // 配列を2つに分割
-// let language_graph_array = chunk(language_graph_data, 2);
-// console.log(language_graph_array);
-// google.charts.load("current", {packages:["corechart"]});
-// google.charts.setOnLoadCallback(drawChartLanguage);
-// function drawChartLanguage() {
-//   var data = google.visualization.arrayToDataTable(language_graph_array);
+let language_graph_array = chunk(language_graph_data, 2);
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChartLanguage);
+function drawChartLanguage() {
+  var data = google.visualization.arrayToDataTable(language_graph_array);
 
-//   var options = {
-//     chartArea:{width:'90%',height:'100%'},
-//     pieHole: 0.5,
-//     legend:
-//         { position: 'none'},
-//     slices: {
-//       0: {color: '#0345EC'},
-//       1: {color: '#0F71BD'},
-//       2: {color: '#20BDDE'},
-//       3: {color: '#3CCEFE'},
-//       4: {color: '#B29EF3'},
-//       5: {color: '#6D46EC'},
-//       6: {color: '#4A17EF'},
-//       7: {color: '#3105C0'}
-//     },
-//     pieSliceBorderColor:  'none'
-//   };
+  var options = {
+    chartArea:{width:'90%',height:'100%'},
+    pieHole: 0.5,
+    legend:
+        { position: 'none'},
+    slices: {
+      0: {color: '#0345EC'},
+      1: {color: '#0F71BD'},
+      2: {color: '#20BDDE'},
+      3: {color: '#3CCEFE'},
+      4: {color: '#B29EF3'},
+      5: {color: '#6D46EC'},
+      6: {color: '#4A17EF'},
+      7: {color: '#3105C0'}
+    },
+    pieSliceBorderColor:  'none'
+  };
 
-//   var chart = new google.visualization.PieChart(document.getElementById('donutchart_language'));
-//   chart.draw(data, options);
-// }
-// // // 右
-// // PHPから配列を受け取る
-// let contents_data = echo $contents_array;?>;
-// // google chart で使うために文字列から数値に変換
-// let contents_graph_data = new Array();
-// contents_graph_data.push('Task', 'Hours per Day');
-// for(let i = 0; i < contents_data.length; i++){
-//   let contents = contents_data[i]["contents_name"];
-//   let hour = Number(contents_data[i]["SUM(study_hour)"]);
-//   contents_graph_data.push(contents);
-//   contents_graph_data.push(hour);
-// };
-// // 配列を2つに分割
-// let contents_graph_array = chunk(contents_graph_data, 2);
-// console.log(contents_graph_array);
-// google.charts.load("current", {packages:["corechart"]});
-// google.charts.setOnLoadCallback(drawChartContent);
-// function drawChartContent() {
-//   var data = google.visualization.arrayToDataTable(contents_graph_array);
-//   var options = {
-//     pieHole: 0.5,
-//     legend:
-//         { position: 'none'},
-//     chartArea:{width:'90%',height: '100%'},
-//     slices: {
-//       0: {color: '#0345EC'},
-//       1: {color: '#0F71BD'},
-//       2: {color: '#20BDDE'},
-//     },
-//     pieSliceBorderColor: 'none'
-//   };
+  var chart = new google.visualization.PieChart(document.getElementById('donutchart_language'));
+  chart.draw(data, options);
+}
+// // 右
+// PHPから配列を受け取る
+let contents_data = @json($contents);
+// google chart で使うために文字列から数値に変換
+let contents_graph_data = new Array();
+contents_graph_data.push('Task', 'Hours per Day');
+let graph_data = Object.entries(contents_data);
+graph_data.forEach(function(key)
+{
+  let contents = data["study_contents"];
+  let time_array = key[1]['study_times'];
+  // 学習時間
+  let datum = 0;
+  time_array.forEach(function(time) {
+    // let time = date["study_times"];
+    // 学習時間
+    datum = datum + time.study_hour;
+    // let language_hour = language_data.reduce((sum, obj) => sum + obj.study_hour, 0)
+  })
+  contents_graph_data.push(key[1]['study_contents']);
+  contents_graph_data.push(datum)
+});
 
-//   var chart = new google.visualization.PieChart(document.getElementById('donutchart_content'));
-//   chart.draw(data, options);
-// }
+// 配列を2つに分割
+let contents_graph_array = chunk(contents_graph_data, 2);
+console.log(contents_graph_array);
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChartContent);
+function drawChartContent() {
+  var data = google.visualization.arrayToDataTable(contents_graph_array);
+  var options = {
+    pieHole: 0.5,
+    legend:
+        { position: 'none'},
+    chartArea:{width:'90%',height: '100%'},
+    slices: {
+      0: {color: '#0345EC'},
+      1: {color: '#0F71BD'},
+      2: {color: '#20BDDE'},
+    },
+    pieSliceBorderColor: 'none'
+  };
 
-// // onReSizeイベント  画面のサイズの変更に対応 
-// window.onresize = function(){
-//   drawChartLanguage();
-//   drawChartContent();
-//   drawChart();
-// }
+  var chart = new google.visualization.PieChart(document.getElementById('donutchart_content'));
+  chart.draw(data, options);
+}
+
+// onReSizeイベント  画面のサイズの変更に対応 
+window.onresize = function(){
+  drawChartLanguage();
+  drawChartContent();
+  drawChart();
+}
 </script>

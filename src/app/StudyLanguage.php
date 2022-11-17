@@ -11,6 +11,6 @@ class StudyLanguage extends Model
     public function study_times()
     {
         //studyLanguageテーブル(従テーブル)の選択肢たち(複数)に対して studyTimesテーブル(主テーブル)の日付を紐づける
-        return $this->belongsTo('App\StudyTime');
+        return $this->hasMany('App\StudyTime');
     }
 }

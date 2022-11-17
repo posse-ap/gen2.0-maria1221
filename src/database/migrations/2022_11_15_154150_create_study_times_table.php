@@ -17,8 +17,8 @@ class CreateStudyTimesTable extends Migration
             $table->bigIncrements('id');
             $table->date('study_date');
             $table->integer('study_hour');
-            $table->integer('language_id');
-            $table->integer('contents_id');
+            $table->integer('study_language_id');
+            $table->integer('study_content_id');
             $table->timestamps();
         });
     }

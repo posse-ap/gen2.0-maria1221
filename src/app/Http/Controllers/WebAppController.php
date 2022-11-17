@@ -32,6 +32,22 @@ class WebAppController extends Controller
         ->whereYear('study_date', $this_year)
         ->whereMonth('study_date', $this_month)
         ->get();
-        return view ('webapp.index', compact('today', 'study_times', 'study_languages', 'study_contents', 'today_study_times', 'month_study_times', 'month_study'));
+        $languages = StudyLanguage::
+        // ->with('study_times:study_language_id');
+        // with(['study_times:study_hour', 'study_times:study_language_id'])
+        with('study_times')
+        // $language = StudyLanguage::orderBy('id', 'asc')
+        // ->with('study_times')
+        ->get();
+        // dd($languages);
+
+        // foreach($languages as $language) {
+
+        //     $language->total_study_hours = array_sum(array_column($language->study_hour->toArray(), 'study_time'));
+        // }
+        $contents = StudyContent::
+        with('study_times')
+        ->get();
+        return view ('webapp.index', compact('today', 'study_times', 'study_languages', 'study_contents', 'today_study_times', 'month_study_times', 'month_study', 'languages', 'contents'));
     }
 }

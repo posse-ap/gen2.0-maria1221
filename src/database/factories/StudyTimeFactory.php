@@ -20,8 +20,8 @@ $factory->define(StudyTime::class, function (Faker $faker) {
         //
         'study_date' => $faker->dateTimeBetween('-1day', '1week')->format('Y-m-d'),
         'study_hour' => $faker->numberBetween(1,10),
-        'language_id' =>$faker->randomElement($all_language_id_array),
-        'contents_id' =>$faker->randomElement($all_content_id_array),
+        'study_language_id' =>$faker->randomElement($all_language_id_array),
+        'study_content_id' =>$faker->randomElement($all_content_id_array),
     ];
 });
 
