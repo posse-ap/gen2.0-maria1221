@@ -21,3 +21,4 @@ class StudyTime extends Model
         return $this->hasOne('App\studyContent');
     }
 }
+

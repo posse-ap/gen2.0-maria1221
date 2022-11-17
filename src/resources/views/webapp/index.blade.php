@@ -30,23 +30,19 @@
         <div class="learning_time">
           <div class="learning_time_box">
             <p class="learning_time_title">Today</p>
-            @foreach($today_study_times as $study_time)
-            <p class="time">{{ $study_time->study_hour }}</p>
-            @endforeach
+            {{-- @foreach($today_study_times as $study_time) --}}
+            <p class="time">{{ array_sum(array_column($today_study_times->toArray(), 'study_hour')) }}</p>
+            {{-- @endforeach --}}
             <p class="unit">hour</p>
           </div>
           <div class="learning_time_box">
             <p class="learning_time_title">Month</p>
-            @foreach($month_study_times as $month_study_time)
-            <p class="time">{{ $month_study_time->month_study_hour}}</p>
-            @endforeach
+            <p class="time">{{ $month_study_times->month_study_hour}}</p>
             <p class="unit">hour</p>
           </div>
           <div class="learning_time_box">
             <p class="learning_time_title">Total</p>
-            @foreach($study_times as $study_time)
-            <p class="time">{{$study_time->total_study_hour }}</p>
-            @endforeach
+            <p class="time">{{$study_times->total_study_hour }}</p>
             <p class="unit">hour</p>
           </div>
         </div>
@@ -55,7 +51,6 @@
           <div class="chart_div" id="chartDiv"></div>
         </div>
       </div>
-
       <!-- 右側 -->
       <div class="right_side">
         <div class="graph_box">
@@ -164,3 +159,162 @@
   <!-- <script src="./webapp.js"></script> -->
 </body>
 </html>
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+
+// 日付ごとの勉強時間がdata_array
+// PHPから配列を受け取る
+// @foreach($today_study_times as $study_time)
+//             <p class="time">{{ $study_time->study_hour }}</p>
+// @endforeach
+
+// 日付ごとの学習時間
+let bar_data_array = @json($month_study);
+
+// google chart で使うために文字列から数値に変換
+let bar_graph_data = new Array();
+// let bar_graph_array = new Array();
+for(let i = 0; i < bar_data_array.length; i++){
+  // let day_array = data_array[i]["DAY(study_date)"].map(Number);
+  let day = Number(bar_data_array[i]["study_date"].split('-')[2]);
+  let hour = Number(bar_data_array[i]["study"]);
+  bar_graph_data.push(day);
+  bar_graph_data.push(hour);
+};
+// // 配列を2つに分割
+const chunk = (arrayData, chunkSize) => 
+  Array.from({length: Math.ceil(arrayData.length / chunkSize)}, (v, i) =>
+    arrayData.slice(i * chunkSize, i * chunkSize + chunkSize));
+let bar_graph_array = chunk(bar_graph_data, 2);
+console.log(bar_graph_array);
+
+// // console.log(time);
+google.charts.load("current", {packages:['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+      var data = new google.visualization.DataTable();
+
+      data.addColumn('number', 'Day of Month');
+      data.addColumn('number', 'Study Hour');
+      data.addRows(bar_graph_array);
+      var options = {
+        legend:
+        { position: 'none'},
+        chartArea:{width:'80%',height:'80%'},
+        hAxis: {
+          title: "",
+          textStyle: {
+            color: '#b8cddf'
+          },
+          ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
+          gridlines: {color: 'none'},
+
+        },
+        vAxis: {
+          ticks: [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44],
+          // showTextEvery: 1,
+          gridlines: {color: 'none'},
+          format: '#h',
+          textStyle: {
+            color: '#b8cddf'
+          },
+          baselineColor: 'transparent',  
+        },
+        maintainAspectRatio: false,
+        colors:['#0f71bc'],
+      };      
+      var materialChart = new google.visualization.ColumnChart(document.getElementById('chartDiv'));
+      materialChart.draw(data, options);
+  }
+
+/*****************
+  ここから円グラフ
+*****************/
+// 左
+// PHPから配列を受け取る
+// let language_data =;
+// // google chart で使うために文字列から数値に変換
+// let language_graph_data = new Array();
+// language_graph_data.push('Task', 'Hours per Day');
+// for(let i = 0; i < language_data.length; i++){
+//   let language = language_data[i]["study_language"];
+//   let language_hour = Number(language_data[i]["SUM(study_hour)"]);
+//   language_graph_data.push(language);
+//   language_graph_data.push(language_hour);
+// };
+// // 配列を2つに分割
+// let language_graph_array = chunk(language_graph_data, 2);
+// console.log(language_graph_array);
+// google.charts.load("current", {packages:["corechart"]});
+// google.charts.setOnLoadCallback(drawChartLanguage);
+// function drawChartLanguage() {
+//   var data = google.visualization.arrayToDataTable(language_graph_array);
+
+//   var options = {
+//     chartArea:{width:'90%',height:'100%'},
+//     pieHole: 0.5,
+//     legend:
+//         { position: 'none'},
+//     slices: {
+//       0: {color: '#0345EC'},
+//       1: {color: '#0F71BD'},
+//       2: {color: '#20BDDE'},
+//       3: {color: '#3CCEFE'},
+//       4: {color: '#B29EF3'},
+//       5: {color: '#6D46EC'},
+//       6: {color: '#4A17EF'},
+//       7: {color: '#3105C0'}
+//     },
+//     pieSliceBorderColor:  'none'
+//   };
+
+//   var chart = new google.visualization.PieChart(document.getElementById('donutchart_language'));
+//   chart.draw(data, options);
+// }
+// // // 右
+// // PHPから配列を受け取る
+// let contents_data = echo $contents_array;?>;
+// // google chart で使うために文字列から数値に変換
+// let contents_graph_data = new Array();
+// contents_graph_data.push('Task', 'Hours per Day');
+// for(let i = 0; i < contents_data.length; i++){
+//   let contents = contents_data[i]["contents_name"];
+//   let hour = Number(contents_data[i]["SUM(study_hour)"]);
+//   contents_graph_data.push(contents);
+//   contents_graph_data.push(hour);
+// };
+// // 配列を2つに分割
+// let contents_graph_array = chunk(contents_graph_data, 2);
+// console.log(contents_graph_array);
+// google.charts.load("current", {packages:["corechart"]});
+// google.charts.setOnLoadCallback(drawChartContent);
+// function drawChartContent() {
+//   var data = google.visualization.arrayToDataTable(contents_graph_array);
+//   var options = {
+//     pieHole: 0.5,
+//     legend:
+//         { position: 'none'},
+//     chartArea:{width:'90%',height: '100%'},
+//     slices: {
+//       0: {color: '#0345EC'},
+//       1: {color: '#0F71BD'},
+//       2: {color: '#20BDDE'},
+//     },
+//     pieSliceBorderColor: 'none'
+//   };
+
+//   var chart = new google.visualization.PieChart(document.getElementById('donutchart_content'));
+//   chart.draw(data, options);
+// }
+
+// // onReSizeイベント  画面のサイズの変更に対応 
+// window.onresize = function(){
+//   drawChartLanguage();
+//   drawChartContent();
+//   drawChart();
+// }
+</script>
