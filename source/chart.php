@@ -1,25 +1,30 @@
 <?php
+// dbと接続
 include("./db_connect.php");
 // 現在日時を取得
 $this_year = date("Y");
-$this_month = date("m"); //3
+$this_month = date("m"); 
 $today = date("Y-m-d");
 // 今日の勉強時間
 $stmt = $pdo->prepare("SELECT SUM(study_hour) FROM study_times WHERE study_date = :today");
 $stmt->bindValue(":today", $today);
 $stmt->execute();
-$today_study_times = $stmt->fetchAll();
+// $today_study_times = $stmt->fetchAll();
+// Allは配列になるけど、fetchだと条件に一致する一番最初の値のみ取得→[0]とか付けなくて良くなる
+$today_study_times = $stmt->fetch();
 // 今月の勉強時間
+// study_dateの月を指定→MONTH(`study_date`) バッククォートにする
 $stmt = $pdo->prepare("SELECT SUM(study_hour) FROM study_times WHERE MONTH(`study_date`) = :this_month AND YEAR(`study_date`) = :this_year");
 $stmt->bindValue(":this_month", $this_month);
 $stmt->bindValue(":this_year", $this_year);
 $stmt->execute();
-$month_study_times = $stmt->fetchAll();
+$month_study_times = $stmt->fetch();
 // トータルの勉強時間
 $stmt = $pdo->query("SELECT SUM(study_hour) FROM study_times");
-$total_hour = $stmt->fetchAll();
+$total_hour = $stmt->fetch();
 // 日付ごとの勉強時間
-$stmt = $pdo->prepare("SELECT DAY(study_date), study_hour FROM study_times WHERE MONTH(`study_date`) = :this_month AND YEAR(`study_date`) = :this_year");
+// $stmt = $pdo->prepare("SELECT DAY(study_date), study_hour FROM study_times WHERE MONTH(`study_date`) = :this_month AND YEAR(`study_date`) = :this_year");
+$stmt = $pdo->prepare("SELECT DAY(study_date), sum(study_hour) FROM study_times WHERE MONTH(`study_date`) = :this_month AND YEAR(`study_date`) = :this_year group by study_date;");
 $stmt->bindValue(":this_month", $this_month);
 $stmt->bindValue(":this_year", $this_year);
 $stmt->execute();
@@ -75,7 +80,7 @@ $stmt->bindValue(":this_month", $this_month);
 $stmt->bindValue(":this_year", $this_year);
 $stmt->execute();
 $study_contents = $stmt->fetchAll();
-print_r($study_language);
+// print_r($study_language);
 //PHPからJSに配列を渡す
 $contents_array = json_encode($study_contents);
 ?>
@@ -85,13 +90,14 @@ $contents_array = json_encode($study_contents);
 <script>
 // PHPから配列を受け取る
 let bar_data_array = <?php echo $date_array;?>;
+console.log(bar_data_array);
 // google chart で使うために文字列から数値に変換
 let bar_graph_data = new Array();
 // let bar_graph_array = new Array();
 for(let i = 0; i < bar_data_array.length; i++){
   // let day_array = data_array[i]["DAY(study_date)"].map(Number);
   let day = Number(bar_data_array[i]["DAY(study_date)"]);
-  let hour = Number(bar_data_array[i]["study_hour"]);
+  let hour = Number(bar_data_array[i]["sum(study_hour)"]);
 
   bar_graph_data.push(day);
   bar_graph_data.push(hour);

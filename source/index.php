@@ -17,13 +17,13 @@ include("./chart.php");
 
 <body>
   <div class="container">
-    <!-- <header class="header">
+    <header class="header">
       <div class="header_elements">
         <img class="header_img" src="./img/POSSElogo.jpg" alt="POSSEロゴ">
         <p>4th week</p>
       </div>
       <button id="headerButton" class="header_button">記録・投稿</button>
-    </header> -->
+    </header>
     <!-- トップページ -->
     <div class="top_contents">
       <!-- 左側 -->
@@ -31,17 +31,17 @@ include("./chart.php");
         <div class="learning_time">
           <div class="learning_time_box">
             <p class="learning_time_title">Today</p>
-            <p class="time"><?php echo $today_study_times[0]["SUM(study_hour)"];?></p>
+            <p class="time"><?php echo $today_study_times["SUM(study_hour)"];?></p>
             <p class="unit">hour</p>
           </div>
           <div class="learning_time_box">
             <p class="learning_time_title">Month</p>
-            <p class="time"><?php echo $month_study_times[0]["SUM(study_hour)"];?></p>
+            <p class="time"><?php echo $month_study_times["SUM(study_hour)"];?></p>
             <p class="unit">hour</p>
           </div>
           <div class="learning_time_box">
             <p class="learning_time_title">Total</p>
-            <p class="time"><?php echo $total_hour[0]["SUM(study_hour)"];?></p>
+            <p class="time"><?php echo $total_hour["SUM(study_hour)"];?></p>
             <p class="unit">hour</p>
           </div>
         </div>
