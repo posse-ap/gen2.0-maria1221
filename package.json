@@ -1,0 +1,26 @@
+{
+  "name": "gen2.0-maria1221",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build-css": "tailwindcss build src/style.css -o dist/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/posse-ap/gen2.0-maria1221.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/posse-ap/gen2.0-maria1221/issues"
+  },
+  "homepage": "https://github.com/posse-ap/gen2.0-maria1221#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
+}
