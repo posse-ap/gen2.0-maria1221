@@ -8,7 +8,7 @@
   <link href="../src/style.css" rel="stylesheet">
   <title>posse event app</title>
 </head>
-<body>
+<body class="bg-gray-100">
   <header class="pl-5 pr-5 flex bg-white h-20 justify-between mx-auto items-center">
       <img class="w-24" src="./img/logo.svg" alt="posse">
       <div>
@@ -18,17 +18,75 @@
         </ul>
       </div>
   </header>
-  <main class="bg-gray-100 p-4">
+  <main class="p-4">
     <p>ようこそPOSSE1:2.0期生 千羽茉莉愛さん</p>
     <index id="realEvent" type="button" onclick="button_click('realEvent')"  class="bg-white my-2 p-2 rounded-xl">リアルイベント</index>
     <div class="flex my-5 gap-2">
-      <index id="all" type="button" onclick="button_click('all')" class="bg-white p-2 font-bold shadow">全て</index>
-      <index id="join" type="button" onclick="button_click('join')" class="bg-white p-2 font-bold shadow">参加</index>
-      <index id="nonparticipation" type="button" onclick="button_click('nonparticipation')" class="bg-white p-2 font-bold shadow">不参加</index>
-      <index id="submitted" type="button" onclick="button_click('submitted')" class="bg-white p-2 font-bold shadow">提出済み</index>
-      <index id="unanswered" type="button" onclick="button_click('unanswered')" class="bg-white p-2 font-bold shadow">未回答</index>
+      <index id="all" type="button" onclick="button_click('all')" class="rounded-xl bg-white p-2 font-bold shadow">全て</index>
+      <index id="join" type="button" onclick="button_click('join')" class="rounded-xl bg-white p-2 font-bold shadow">参加</index>
+      <index id="nonparticipation" type="button" onclick="button_click('nonparticipation')" class="rounded-xl bg-white p-2 font-bold shadow">不参加</index>
+      <index id="submitted" type="button" onclick="button_click('submitted')" class="rounded-xl bg-white p-2 font-bold shadow">提出済み</index>
+      <index id="unanswered" type="button" onclick="button_click('unanswered')" class="rounded-xl bg-white p-2 font-bold shadow">未回答</index>
     </div>
-    <div id="aa">aaaa</div>
+    <div>
+      <p>一覧</p>
+      <div>
+        <div class="flex justify-between bg-white shadow rounded-xl p-2 mt-2">
+          <div>
+            <div class="flex gap-2">
+              <div class="font-bold">足腰粉砕大作戦</div>
+              <div class="bg-blue-500 rounded-md text-xs p-1.5 text-white">1期生</div>
+              <div class="bg-blue-500 rounded-md text-xs p-1.5 text-white">2期生</div>   
+            </div>
+            <p>2022年12月17日(土)</p>
+            <p class="text-xs text-gray-500">13:00~16:00</p>  
+          </div>
+          <div class="text-right">
+            <div class="flex">
+              <div class="text-center w-6 h-6 text-white bg-orange-400 rounded-full">!</div>
+              <p class="text-orange-400">未回答</p>
+            </div>
+              <p class="text-orange-400 text-xs">期限 12月17日16時</p>
+            <p class="mt-2">4人参加></p>
+          </div>
+        </div>
+        <div class="flex justify-between bg-white shadow rounded-xl p-2 mt-2">
+          <div>
+            <div class="flex gap-2">
+              <div class="font-bold">冬のDX</div>
+              <div class="bg-blue-500 rounded-md text-xs p-1.5 text-white">全期生</div>
+            </div>
+            <p>2022年12月28日(水)</p>
+            <p class="text-xs text-gray-500">10:00~20:00</p>
+          </div>
+          <div class="text-right">
+            <div class="flex">
+              <div class="m-0 check"></div>
+              <p class="text-green-400">参加</p>
+            </div>
+            <p class="mt-2">34人参加></p>
+          </div>
+        </div>
+        <div class="flex justify-between bg-white shadow rounded-xl p-2 mt-2">
+          <div>
+            <div class="flex gap-2">
+              <div class="font-bold">春のDX</div>
+              <div class="bg-blue-500 rounded-md text-xs p-1.5 text-white">全期生</div>
+            </div>
+            <p>2023年3月28日(水)</p>
+            <p class="text-xs text-gray-500">13:00~18:00</p> 
+          </div>
+          <div class="text-right">
+            <div class="flex">
+              <div class="text-center w-6 h-6 text-white bg-orange-400 rounded-full">!</div>
+              <p class="text-orange-400">未回答</p>
+            </div>
+            <p class="text-orange-400 text-xs">期限 12月28日18時</p>
+            <p class="mt-2">4人参加></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
   <script src="../src/script.js"></script>
 </body>

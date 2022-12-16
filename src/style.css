@@ -6,3 +6,20 @@
   background-color: rgb(15,113,189);
   color: white;
 }
+.check {
+  background-color: rgb(189,226,97);
+  padding-top: 6px;
+  padding-left: 4px; 
+  border-radius: 50%;
+}
+.check::after {
+  content: '';
+  display: block;
+  margin-right: 4px;
+  margin-top: 2px;
+  width: 15px;
+  height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+}
