@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="style.css" rel="stylesheet">
+  <link href="../src/style.css" rel="stylesheet">
   <title>posse event app</title>
 </head>
 <body>
@@ -17,8 +18,18 @@
         </ul>
       </div>
   </header>
-  <main class="bg-gray-100">
-    <div class="text-red-300" >a</div>
+  <main class="bg-gray-100 p-4">
+    <p>ようこそPOSSE1:2.0期生 千羽茉莉愛さん</p>
+    <index id="realEvent" type="button" onclick="button_click('realEvent')"  class="bg-white my-2 p-2 rounded-xl">リアルイベント</index>
+    <div class="flex my-5 gap-2">
+      <index id="all" type="button" onclick="button_click('all')" class="bg-white p-2 font-bold shadow">全て</index>
+      <index id="join" type="button" onclick="button_click('join')" class="bg-white p-2 font-bold shadow">参加</index>
+      <index id="nonparticipation" type="button" onclick="button_click('nonparticipation')" class="bg-white p-2 font-bold shadow">不参加</index>
+      <index id="submitted" type="button" onclick="button_click('submitted')" class="bg-white p-2 font-bold shadow">提出済み</index>
+      <index id="unanswered" type="button" onclick="button_click('unanswered')" class="bg-white p-2 font-bold shadow">未回答</index>
+    </div>
+    <div id="aa">aaaa</div>
   </main>
+  <script src="../src/script.js"></script>
 </body>
 </html>
