@@ -2,12 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\BigQuestion;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(BigQuestion::class, function (Faker $faker) {
     return [
         //
-        $faker->name
+        'name'=>$faker->name
     ];
 });
