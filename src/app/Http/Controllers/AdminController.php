@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Hash;
-// use App\AdminUser;
-// use App\Question;
-// use App\BigQuestion;
-// use App\Choice;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\AdminUser;
 use App\Question;
 use App\BigQuestion;
 use App\Choice;
+// use Illuminate\Foundation\Testing\RefreshDatabase;
+// use Illuminate\Http\Request;
+// use App\Question;
+// use App\BigQuestion;
+// use App\Choice;
 
 class AdminController extends Controller
 {
-    use RefreshDatabase;
     public function loginIndex() {
         return view('admin.login');
     }
@@ -48,7 +47,22 @@ class AdminController extends Controller
     }
 
     public function edit(Request $request, $id) {
-        
+        if(!Question::find($id)){
+            // abort() 全ての処理を止めて、指定したエラーページを表示
+            return abort(404);
+        }
+
+        $request->validate(
+            // name0が入力必須で最大20
+            [
+            'name0' => 'required|max:20',
+            'name1' => 'required|max:20',
+            'name2' => 'required|max:20',
+            //valid チェックボックス。 入力必須で0～2の間で、数値
+            'valid' => 'required|between:0,2|numeric',
+            ]
+        );
+
         $choices = Question::find($id)->choices;
         foreach ($choices as $index => $choice) {
             $choice->name = $request->{'name' . $index};

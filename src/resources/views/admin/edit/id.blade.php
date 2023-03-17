@@ -9,13 +9,14 @@
 </head>
 
 <body>
-    <img src="/img/{{ $question->image }}" alt="">
+    {{-- <img src="/img/{{ $question->image }}" alt=""> --}}
     <form action="/{{ request()->path() }}" method="POST">
         @csrf
         <table>
             <tr>
                 <th>選択肢</th>
                 <th>正解</th>
+                {{-- {{dd($question)}} --}}
             </tr>
             @foreach($question->choices as $choice)
                 <tr>
